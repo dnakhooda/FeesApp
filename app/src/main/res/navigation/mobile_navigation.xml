@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_overview">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.feesapp.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_overview"
+        android:name="com.example.feesapp.ui.overview.OverviewFragment"
+        android:label="@string/title_overview"
+        tools:layout="@layout/fragment_overview" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.feesapp.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_edit"
+        android:name="com.example.feesapp.ui.edit.EditFragment"
+        android:label="@string/title_edit"
+        tools:layout="@layout/fragment_edit" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.feesapp.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_calc_income"
+        android:name="com.example.feesapp.ui.calcIncome.CalcIncomeFragment"
+        android:label="@string/title_calc_income"
+        tools:layout="@layout/fragment_calcincome" />
 </navigation>

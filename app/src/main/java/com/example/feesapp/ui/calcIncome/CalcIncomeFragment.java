@@ -1,4 +1,4 @@
-package com.example.feesapp.ui.notifications;
+package com.example.feesapp.ui.calcIncome;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.feesapp.databinding.FragmentNotificationsBinding;
+import com.example.feesapp.databinding.FragmentCalcincomeBinding;
 
-public class NotificationsFragment extends Fragment {
+public class CalcIncomeFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentCalcincomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+        CalcIncomeViewModel notificationsViewModel =
+                new ViewModelProvider(this).get(CalcIncomeViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentCalcincomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textNotifications;
