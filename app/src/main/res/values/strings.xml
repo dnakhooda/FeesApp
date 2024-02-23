@@ -1,6 +1,14 @@
 <resources>
+    <!-- Titles -->
     <string name="app_name">FeesApp</string>
     <string name="title_overview">Overview</string>
     <string name="title_edit">Edit</string>
-    <string name="title_calc_income">Income</string>
+    <string name="title_calculate_income">Calculate Income</string>
+    <string name="title_calculate_income_shortened">Income</string>
+    <string name="title_simulate_expenses">Simulate Expenses</string>
+    <string name="title_simulate_expenses_shortened">Simulate</string>
+    <string name="title_settings">Settings</string>
+
+    <!-- Description -->
+    <string name="main_logo_description">App Logo</string>
 </resources>

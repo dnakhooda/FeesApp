@@ -18,14 +18,14 @@ public class OverviewFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        OverviewViewModel homeViewModel =
+        OverviewViewModel viewModel =
                 new ViewModelProvider(this).get(OverviewViewModel.class);
 
         binding = FragmentOverviewBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textOverview;
+        viewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

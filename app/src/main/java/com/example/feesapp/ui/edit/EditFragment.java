@@ -18,14 +18,14 @@ public class EditFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        EditViewModel dashboardViewModel =
+        EditViewModel viewModel =
                 new ViewModelProvider(this).get(EditViewModel.class);
 
         binding = FragmentEditBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textEdit;
+        viewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

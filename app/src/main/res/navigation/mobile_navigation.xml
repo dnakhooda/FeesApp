@@ -18,8 +18,20 @@
         tools:layout="@layout/fragment_edit" />
 
     <fragment
-        android:id="@+id/navigation_calc_income"
-        android:name="com.example.feesapp.ui.calcIncome.CalcIncomeFragment"
-        android:label="@string/title_calc_income"
-        tools:layout="@layout/fragment_calcincome" />
+        android:id="@+id/navigation_calculate_income"
+        android:name="com.example.feesapp.ui.calculateIncome.CalculateIncomeFragment"
+        android:label="@string/title_calculate_income"
+        tools:layout="@layout/fragment_calculate_income" />
+
+    <fragment
+        android:id="@+id/navigation_simulate_expenses"
+        android:name="com.example.feesapp.ui.simulateExpenses.SimulateExpensesFragment"
+        android:label="@string/title_simulate_expenses"
+        tools:layout="@layout/fragment_simulate_expenses" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.feesapp.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

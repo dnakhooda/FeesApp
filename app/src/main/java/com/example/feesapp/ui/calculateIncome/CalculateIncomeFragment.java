@@ -1,4 +1,4 @@
-package com.example.feesapp.ui.calcIncome;
+package com.example.feesapp.ui.calculateIncome;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.feesapp.databinding.FragmentCalcincomeBinding;
+import com.example.feesapp.databinding.FragmentCalculateIncomeBinding;
 
-public class CalcIncomeFragment extends Fragment {
+public class CalculateIncomeFragment extends Fragment {
 
-    private FragmentCalcincomeBinding binding;
+    private FragmentCalculateIncomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        CalcIncomeViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(CalcIncomeViewModel.class);
+        CalculateIncomeViewModel viewModel =
+                new ViewModelProvider(this).get(CalculateIncomeViewModel.class);
 
-        binding = FragmentCalcincomeBinding.inflate(inflater, container, false);
+        binding = FragmentCalculateIncomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textCalculateIncome;
+        viewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
