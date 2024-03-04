@@ -1,36 +1,78 @@
 package com.example.feesapp;
 
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 
+import com.example.feesapp.ui.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.feesapp.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class MainActivity extends AppCompatActivity {
+    public static MainActivity instance;
+
+    private final ArrayList<Fee> fees = new ArrayList<>();
     private ActivityMainBinding binding;
+    private SettingsFragment.Currency currency = SettingsFragment.Currency.Euro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_overview, R.id.navigation_edit, R.id.navigation_calculate_income, R.id.navigation_simulate_expenses, R.id.navigation_settings)
-                .build();
+        // Setup Navigation
+        BottomNavigationView navView = binding.navView;
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavigationUI.setupWithNavController(navView, navController);
+
+        fees.add(new Fee("Spotify", 5.00, Fee.ChargeRate.monthly, Fee.FeesCategory.MembershipFee));
+        fees.add(new Fee("Gym", 5.50, Fee.ChargeRate.monthly, Fee.FeesCategory.MembershipFee));
     }
 
+    public String currencyToSymbol(SettingsFragment.Currency currency) {
+        switch (currency) {
+            case USDollar:
+                return "$";
+            case Euro:
+                return "€";
+            case Yen:
+                return "JP¥";
+            case Sterling:
+                return "£";
+            case Renminbi:
+                return "CN¥";
+            case AustralianDollar:
+                return "A$";
+            case CanadianDollar:
+                return "C$";
+            case SwissFranc:
+                return "Fr";
+            case HongKongDollar:
+                return "HK$";
+            case SingaporeDollar:
+                return "S$";
+        }
+        return null;
+    }
+
+    public ArrayList<Fee> getFees() {
+        return fees;
+    }
+
+    public SettingsFragment.Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(SettingsFragment.Currency currency) {
+        this.currency = currency;
+    }
 }

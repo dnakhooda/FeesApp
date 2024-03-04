@@ -17,16 +17,17 @@ public class SimulateExpensesFragment extends Fragment {
 
     private FragmentSimulateExpensesBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        SimulateExpensesViewModel viewModel =
-                new ViewModelProvider(this).get(SimulateExpensesViewModel.class);
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Get Simulate Expenses View Model
+        SimulateExpensesViewModel viewModel = new ViewModelProvider(this).get(SimulateExpensesViewModel.class);
 
         binding = FragmentSimulateExpensesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSimulateExpenses;
         viewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
         return root;
     }
 

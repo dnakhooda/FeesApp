@@ -21,19 +21,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text_overview"
-        android:layout_width="match_parent"
+    <TableLayout
+        android:id="@+id/overview_cost_table"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="148dp"
+        android:background="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/overview_cost_table_row_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/overview_cost_table_row_1_column_1"
+                android:text=""
+                android:padding="8dp"
+                android:background="@drawable/table_border"/>
+
+            <TextView
+                android:id="@+id/overview_cost_table_row_1_column_2"
+                android:text="1 Day"
+                android:padding="8dp"
+                android:background="@drawable/table_border"/>
+
+            <TextView
+                android:id="@+id/overview_cost_table_row_1_column_3"
+                android:text="10 Days"
+                android:padding="8dp"
+                android:background="@drawable/table_border"/>
+
+            <TextView
+                android:id="@+id/overview_cost_table_row_1_column_4"
+                android:text="100 Days"
+                android:padding="8dp"
+                android:background="@drawable/table_border"/>
+
+            <TextView
+                android:id="@+id/overview_cost_table_row_1_column_5"
+                android:text="1000 Days"
+                android:padding="8dp"
+                android:background="@drawable/table_border"/>
+        </TableRow>
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

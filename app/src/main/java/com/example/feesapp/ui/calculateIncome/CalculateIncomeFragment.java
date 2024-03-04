@@ -16,10 +16,9 @@ public class CalculateIncomeFragment extends Fragment {
 
     private FragmentCalculateIncomeBinding binding;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        CalculateIncomeViewModel viewModel =
-                new ViewModelProvider(this).get(CalculateIncomeViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Get Calculate Income View Model
+        CalculateIncomeViewModel viewModel = new ViewModelProvider(this).get(CalculateIncomeViewModel.class);
 
         binding = FragmentCalculateIncomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
