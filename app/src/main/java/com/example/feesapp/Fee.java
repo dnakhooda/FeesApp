@@ -1,7 +1,6 @@
 package com.example.feesapp;
 
 public class Fee {
-
     enum FeesCategory {
         ApplicationFee,
         GovernmentFee,
