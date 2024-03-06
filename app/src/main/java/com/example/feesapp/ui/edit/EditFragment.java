@@ -10,14 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import com.example.feesapp.Fee;
 import com.example.feesapp.MainActivity;
 import com.example.feesapp.R;
 import com.example.feesapp.databinding.FragmentEditBinding;
 import com.example.feesapp.databinding.FragmentOverviewBinding;
+import com.example.feesapp.ui.addItem.AddItemFragment;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class EditFragment extends Fragment {
     private MainActivity mainActivity;
@@ -28,8 +33,20 @@ public class EditFragment extends Fragment {
         EditViewModel viewModel = new ViewModelProvider(this).get(EditViewModel.class);
         binding = FragmentEditBinding.inflate(inflater, container, false);
         mainActivity = MainActivity.instance;
+        mainActivity.bringBackViewBar();
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
+
+        binding.addFeeButtonEdit.setOnClickListener(view -> {
+            navController.navigate(R.id.action_navigation_edit_to_navigation_add_item);
+        });
 
         makeEditLayouts(mainActivity.getFees());
+
+        if (mainActivity.findViewById(R.id.edit_fee_button) != null) {
+            mainActivity.findViewById(R.id.edit_fee_button).setOnClickListener(view -> {
+                navController.navigate(R.id.action_navigation_edit_to_navigation_edit_item);
+            });
+        }
 
         return binding.getRoot();
     }
@@ -50,7 +67,7 @@ public class EditFragment extends Fragment {
         category.setText(Fee.changeFeeCategoryToString(fee.getCategory()));
 
         TextView cost = inflatedLayout.findViewById(R.id.edit_fee_cost);
-        String feeString = mainActivity.currencyToSymbol(mainActivity.getCurrency()) + fee.getAmountAsString() + " " + Fee.changeChargeRateToString(fee.getChargeRate());
+        String feeString = mainActivity.currencyToSymbol(mainActivity.getCurrency()) + Fee.numberToStringWithTwoDecimals(fee.getAmount()) + " " + Fee.changeChargeRateToString(fee.getChargeRate());
         cost.setText(feeString);
 
         editLinearLayout.addView(inflatedLayout);

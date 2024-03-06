@@ -1,6 +1,7 @@
 package com.example.feesapp;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.feesapp.ui.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,9 +34,16 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = binding.navView;
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(navView, navController);
+    }
 
-        fees.add(new Fee("Spotify", 5.00, Fee.ChargeRate.monthly, Fee.FeesCategory.MembershipFee));
-        fees.add(new Fee("Gym", 5.50, Fee.ChargeRate.monthly, Fee.FeesCategory.MembershipFee));
+    public void removeNavBar() {
+        binding.navView.setVisibility(View.GONE);
+    }
+
+    public void bringBackViewBar() {
+        if (binding == null)
+            return;
+        binding.navView.setVisibility(View.VISIBLE);
     }
 
     public String currencyToSymbol(SettingsFragment.Currency currency) {

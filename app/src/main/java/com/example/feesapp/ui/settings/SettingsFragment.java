@@ -38,6 +38,7 @@ public class SettingsFragment extends Fragment {
         SettingsViewModel viewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
 
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
+        MainActivity.instance.bringBackViewBar();
         View root = binding.getRoot();
 
         setCurrentCheck(binding);
@@ -132,8 +133,7 @@ public class SettingsFragment extends Fragment {
             return;
         }
 
-        if (checkedRadioButton.getId() == binding.currencyButtonSgDollar.getId())
-            MainActivity.instance.setCurrency(Currency.SingaporeDollar);
+        MainActivity.instance.setCurrency(Currency.SingaporeDollar);
     }
 
     @Override

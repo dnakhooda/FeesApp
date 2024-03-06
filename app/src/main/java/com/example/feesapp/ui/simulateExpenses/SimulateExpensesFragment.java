@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.feesapp.MainActivity;
 import com.example.feesapp.databinding.FragmentSimulateExpensesBinding;
 
 public class SimulateExpensesFragment extends Fragment {
@@ -23,6 +24,7 @@ public class SimulateExpensesFragment extends Fragment {
         SimulateExpensesViewModel viewModel = new ViewModelProvider(this).get(SimulateExpensesViewModel.class);
 
         binding = FragmentSimulateExpensesBinding.inflate(inflater, container, false);
+        MainActivity.instance.bringBackViewBar();
         View root = binding.getRoot();
 
         final TextView textView = binding.textSimulateExpenses;

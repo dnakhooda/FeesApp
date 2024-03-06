@@ -1,14 +1,14 @@
 package com.example.feesapp;
 
 public class Fee {
-    enum FeesCategory {
+    public enum FeesCategory {
         ApplicationFee,
         GovernmentFee,
         ServiceFee,
         MembershipFee,
     }
 
-    enum ChargeRate {
+    public enum ChargeRate {
         daily,
         weekly,
         monthly,
@@ -19,6 +19,20 @@ public class Fee {
     private double amount;
     private ChargeRate chargeRate;
     private FeesCategory category;
+
+    public static double roundToTwoDecimalPlaces(double value) {
+        int tempInt = (int) (value * 100);
+        return tempInt/100.0;
+    }
+
+    public static String numberToStringWithTwoDecimals(double value) {
+        if ((value * 10) % 10 == 0 || (value * 100) % 10 == 0)
+            return value + "0";
+        return String.valueOf(value);
+    }
+
+    private static final double DAYS_IN_MONTH = 30.437;
+    private static final double DAYS_IN_YEAR = 365.25;
 
     public Fee(String title, double amount, ChargeRate chargeRate, FeesCategory category) {
         this.title = title;
@@ -67,15 +81,22 @@ public class Fee {
         return amount;
     }
 
-    public String getAmountAsString() {
-        if ((amount * 10) % 10 == 0 || (amount * 100) % 10 == 0)
-            return amount + "0";
-        return String.valueOf(amount);
+    public void setAmount(double amount) {
+        this.amount = roundToTwoDecimalPlaces(amount);
     }
 
-    public void setAmount(double amount) {
-        int tempInt = (int) (amount * 100);
-        this.amount = tempInt/100.0;
+    public double getDailyAmount() {
+        switch (chargeRate) {
+            case daily:
+                return amount;
+            case weekly:
+                return amount/7;
+            case monthly:
+                return amount/DAYS_IN_MONTH;
+            case yearly:
+                return amount/DAYS_IN_YEAR;
+        }
+        return 0.0;
     }
 
     public ChargeRate getChargeRate() {

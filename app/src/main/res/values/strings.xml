@@ -8,6 +8,8 @@
     <string name="title_simulate_expenses">Simulate Expenses</string>
     <string name="title_simulate_expenses_shortened">Simulate</string>
     <string name="title_settings">Settings</string>
+    <string name="title_add_item">Add</string>
+    <string name="title_edit_item">Edit</string>
 
     <!-- Description -->
     <string name="main_logo_description">App Logo</string>

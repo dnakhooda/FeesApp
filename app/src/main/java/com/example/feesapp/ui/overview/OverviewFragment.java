@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.feesapp.Fee;
 import com.example.feesapp.MainActivity;
 import com.example.feesapp.R;
 import com.example.feesapp.databinding.FragmentOverviewBinding;
@@ -27,6 +28,7 @@ public class OverviewFragment extends Fragment {
         OverviewViewModel viewModel = new ViewModelProvider(this).get(OverviewViewModel.class);
 
         binding = FragmentOverviewBinding.inflate(inflater, container, false);
+        MainActivity.instance.bringBackViewBar();
         View root = binding.getRoot();
         return root;
     }
@@ -44,7 +46,7 @@ public class OverviewFragment extends Fragment {
     private void calculateOverviewCostTable(double[][] overviewCostTable) {
         for (int i = 0; i < MainActivity.instance.getFees().size(); i++) {
             for (int j = 0; j < 4; j++) {
-                overviewCostTable[i][j] = MainActivity.instance.getFees().get(i).getAmount() * (Math.pow(10, j));
+                overviewCostTable[i][j] = Fee.roundToTwoDecimalPlaces(MainActivity.instance.getFees().get(i).getDailyAmount() * (Math.pow(10, j)));
             }
         }
     }
@@ -67,7 +69,7 @@ public class OverviewFragment extends Fragment {
                     textView.setText(MainActivity.instance.getFees().get(i-1).getTitle());
                 }
                 else {
-                    textView.setText(String.valueOf(overviewCostTable[i-1][j-1]));
+                    textView.setText(Fee.numberToStringWithTwoDecimals(overviewCostTable[i-1][j-1]));
                 }
             }
         }

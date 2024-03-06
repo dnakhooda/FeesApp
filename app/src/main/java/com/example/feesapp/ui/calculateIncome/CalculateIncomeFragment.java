@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.feesapp.MainActivity;
 import com.example.feesapp.databinding.FragmentCalculateIncomeBinding;
 
 public class CalculateIncomeFragment extends Fragment {
@@ -21,6 +22,7 @@ public class CalculateIncomeFragment extends Fragment {
         CalculateIncomeViewModel viewModel = new ViewModelProvider(this).get(CalculateIncomeViewModel.class);
 
         binding = FragmentCalculateIncomeBinding.inflate(inflater, container, false);
+        MainActivity.instance.bringBackViewBar();
         View root = binding.getRoot();
 
         final TextView textView = binding.textCalculateIncome;
