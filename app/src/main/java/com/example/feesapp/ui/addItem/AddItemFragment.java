@@ -57,6 +57,11 @@ public class AddItemFragment extends Fragment {
             return true;
         }
 
+        if (MainActivity.instance.getFeeByTitle(title) != null) {
+            Toast.makeText(MainActivity.instance, "Title Unique! No Two Fees Should Have The Same Title!", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
         double amount = 0;
         try {
             amount = Double.parseDouble(binding.addAmountField.getText().toString());
@@ -112,6 +117,8 @@ public class AddItemFragment extends Fragment {
 
         Fee fee = new Fee(title, amount, chargeRate, category);
         MainActivity.instance.getFees().add(fee);
+
+        MainActivity.instance.saveFees();
 
         return false;
     }

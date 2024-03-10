@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/dark_green"
+    android:background="@drawable/edit_fee_border"
     android:layout_width="375dp"
     android:layout_height="120dp"
-    android:layout_margin="8dp">
+    android:layout_margin="8dp"
+    android:elevation="8dp">
 
     <TextView
         android:id="@+id/edit_fee_title"
@@ -53,13 +54,14 @@
         android:id="@+id/edit_fee_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/green"
+        android:background="@drawable/rounded_green_buttons_border"
         android:text="@string/edit_fee_button_text"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.961"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="12dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

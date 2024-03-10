@@ -16,12 +16,15 @@
         android:name="com.example.feesapp.ui.edit.EditFragment"
         android:label="@string/title_edit"
         tools:layout="@layout/fragment_edit" >
-        <action
-            android:id="@+id/action_navigation_edit_to_navigation_add_item"
-            app:destination="@id/navigation_add_item" />
+
         <action
             android:id="@+id/action_navigation_edit_to_navigation_edit_item"
             app:destination="@id/navigation_edit_item" />
+
+        <action
+            android:id="@+id/action_navigation_edit_to_navigation_add_item"
+            app:destination="@id/navigation_add_item" />
+
     </fragment>
 
     <fragment
@@ -50,7 +53,7 @@
 
     <fragment
         android:id="@+id/navigation_edit_item"
-        android:name="com.example.feesapp.ui.edit.EditFragment"
+        android:name="com.example.feesapp.ui.editItem.EditItemFragment"
         android:label="@string/title_edit_item"
         tools:layout="@layout/fragment_edit_item" />
 </navigation>

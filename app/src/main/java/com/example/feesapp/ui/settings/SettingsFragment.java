@@ -48,7 +48,7 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setCurrentCheck(FragmentSettingsBinding binding) {
-        switch (MainActivity.instance.getCurrency()) {
+        switch (MainActivity.instance.getSettings().getCurrencyType()) {
             case USDollar:
                 binding.currencyButtonUsDollar.setChecked(true);
                 break;
@@ -89,51 +89,51 @@ public class SettingsFragment extends Fragment {
             return;
 
         if (checkedRadioButton.getId() == binding.currencyButtonUsDollar.getId()) {
-            MainActivity.instance.setCurrency(Currency.USDollar);
+            MainActivity.instance.getSettings().setCurrencyType(Currency.USDollar);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonEuro.getId()) {
-            MainActivity.instance.setCurrency(Currency.Euro);
+            MainActivity.instance.getSettings().setCurrencyType(Currency.Euro);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonYen.getId()) {
-            MainActivity.instance.setCurrency(Currency.Yen);
+            MainActivity.instance.getSettings().setCurrencyType(Currency.Yen);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonSterling.getId()) {
-            MainActivity.instance.setCurrency(Currency.Sterling);
+            MainActivity.instance.getSettings().setCurrencyType(Currency.Sterling);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonRenminbi.getId()) {
-            MainActivity.instance.setCurrency(Currency.Renminbi);
+            MainActivity.instance.getSettings().setCurrencyType(Currency.Renminbi);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonAusDollar.getId()) {
-            MainActivity.instance.setCurrency(Currency.AustralianDollar);
+            MainActivity.instance.getSettings().setCurrencyType(Currency.AustralianDollar);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonCanadianDollar.getId()) {
-            MainActivity.instance.setCurrency(Currency.CanadianDollar);
+            MainActivity.instance.getSettings().setCurrencyType(Currency.CanadianDollar);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonSwissDollar.getId()) {
-            MainActivity.instance.setCurrency(Currency.SwissFranc);
+            MainActivity.instance.getSettings().setCurrencyType(Currency.SwissFranc);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonHkDollar.getId()) {
-            MainActivity.instance.setCurrency(Currency.HongKongDollar);
+            MainActivity.instance.getSettings().setCurrencyType(Currency.HongKongDollar);
             return;
         }
 
-        MainActivity.instance.setCurrency(Currency.SingaporeDollar);
+        MainActivity.instance.getSettings().setCurrencyType(Currency.SingaporeDollar);
     }
 
     @Override

@@ -42,10 +42,39 @@ public class EditItemFragment extends Fragment {
         });
 
         binding.editDeleteButton.setOnClickListener(view -> {
+            MainActivity.instance.removeFeeByTitle(MainActivity.instance.getFeeToEdit().getTitle());
             navController.popBackStack();
         });
 
+        setInputs();
+
         return root;
+    }
+
+    private void setInputs() {
+        Fee fee = MainActivity.instance.getFeeToEdit();
+
+        binding.editTitleField.setText( fee.getTitle() );
+
+        binding.editAmountField.setText( String.format( Double.toString( fee.getAmount() ) ) );
+
+        if (fee.getChargeRate().equals(Fee.ChargeRate.daily))
+            binding.editButtonDaily.setChecked(true);
+        else if (fee.getChargeRate().equals(Fee.ChargeRate.weekly))
+            binding.editButtonWeekly.setChecked(true);
+        else if ((fee.getChargeRate().equals(Fee.ChargeRate.monthly)))
+            binding.editButtonMonthly.setChecked(true);
+        else
+            binding.editButtonYearly.setChecked(true);
+
+        if (fee.getCategory().equals(Fee.FeesCategory.ServiceFee))
+            binding.editServiceFeeButton.setChecked(true);
+        else if (fee.getCategory().equals(Fee.FeesCategory.ApplicationFee))
+            binding.editApplicationFeeButton.setChecked(true);
+        else if (fee.getCategory().equals(Fee.FeesCategory.MembershipFee))
+            binding.editMembershipFeeButton.setChecked(true);
+        else
+            binding.editGovernmentFeeButton.setChecked(true);
     }
 
     private boolean changeFee() {
@@ -57,6 +86,11 @@ public class EditItemFragment extends Fragment {
 
         if (title.length() > 9) {
             Toast.makeText(MainActivity.instance, "Title Must Be Less Than Ten Characters!", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        if (MainActivity.instance.getFeeByTitle(title) != null && !MainActivity.instance.getFeeByTitle(title).equals(MainActivity.instance.getFeeToEdit())) {
+            Toast.makeText(MainActivity.instance, "Title Unique! No Two Fees Should Have The Same Title!", Toast.LENGTH_LONG).show();
             return true;
         }
 
@@ -113,8 +147,12 @@ public class EditItemFragment extends Fragment {
         else
             category = Fee.FeesCategory.MembershipFee;
 
-        Fee fee = new Fee(title, amount, chargeRate, category);
-        MainActivity.instance.getFees().add(fee);
+        MainActivity.instance.getFeeToEdit().setTitle(title);
+        MainActivity.instance.getFeeToEdit().setAmount(amount);
+        MainActivity.instance.getFeeToEdit().setChargeRate(chargeRate);
+        MainActivity.instance.getFeeToEdit().setCategory(category);
+
+        MainActivity.instance.saveFees();
 
         return false;
     }

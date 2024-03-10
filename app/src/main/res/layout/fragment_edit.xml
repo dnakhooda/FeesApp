@@ -46,13 +46,14 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/add_fee_button_edit"
-                android:background="@color/green"
+                android:background="@drawable/rounded_green_buttons_border"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+"
                 android:textSize="30sp"
                 android:layout_margin="8dp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:elevation="8dp"/>
 
         </LinearLayout>
 
