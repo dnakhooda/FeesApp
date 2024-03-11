@@ -106,12 +106,14 @@ public class AddItemFragment extends Fragment {
         Fee.FeesCategory category;
 
         int categoryCheckedId = MainActivity.instance.findViewById(binding.addCategoryGroup.getCheckedRadioButtonId()).getId();
-        if (categoryCheckedId == binding.addApplicationFeeButton.getId())
-            category = Fee.FeesCategory.ApplicationFee;
-        else if (categoryCheckedId == binding.addGovernmentFeeButton.getId())
-            category = Fee.FeesCategory.GovernmentFee;
+        if (categoryCheckedId == binding.addRentFeeButton.getId())
+            category = Fee.FeesCategory.RentOrPropertyTaxFee;
+        else if (categoryCheckedId == binding.addInsuranceFeeButton.getId())
+            category = Fee.FeesCategory.InsuranceFee;
         else if (categoryCheckedId == binding.addServiceFeeButton.getId())
             category = Fee.FeesCategory.ServiceFee;
+        else if (categoryCheckedId == binding.addOtherFeeButton.getId())
+            category = Fee.FeesCategory.OtherFee;
         else
             category = Fee.FeesCategory.MembershipFee;
 

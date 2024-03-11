@@ -4,69 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.overview.OverviewFragment">
+    tools:context=".ui.overview.OverviewFragment"
+    android:background="@color/dark_gray">
 
-    <TextView
-        android:id="@+id/title_overview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/title_overview"
-        android:fontFamily="sans-serif-light"
-        android:textSize="40sp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-    <TableLayout
-        android:id="@+id/overview_cost_table"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
-        android:background="@color/light_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TableRow
-            android:id="@+id/overview_cost_table_row_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/overview_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/overview_cost_table_row_1_column_1"
-                android:text=""
-                android:padding="8dp"
-                android:background="@drawable/table_border"/>
+                android:id="@+id/title_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/title_overview"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/white"
+                android:textSize="40sp" />
 
             <TextView
-                android:id="@+id/overview_cost_table_row_1_column_2"
-                android:text="1 Day"
+                android:id="@+id/expenses_by_fee_category_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Expenses By Fee Category"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <org.eazegraph.lib.charts.PieChart
+                android:id="@+id/category_pie_chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="32dp"
                 android:padding="8dp"
-                android:background="@drawable/table_border"/>
+                app:egLegendTextSize="16sp"
+                app:egUsePieRotation="true"
+                app:egValueTextSize="32sp" />
 
             <TextView
-                android:id="@+id/overview_cost_table_row_1_column_3"
-                android:text="10 Days"
-                android:padding="8dp"
-                android:background="@drawable/table_border"/>
+                android:id="@+id/total_expenses_chart_for_fees_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Total Expenses Chart For Fees"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/overview_cost_table_row_1_column_4"
-                android:text="100 Days"
-                android:padding="8dp"
-                android:background="@drawable/table_border"/>
+            <TableLayout
+                android:id="@+id/overview_cost_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/light_gray"
+                android:layout_marginBottom="20dp">
 
-            <TextView
-                android:id="@+id/overview_cost_table_row_1_column_5"
-                android:text="1000 Days"
-                android:padding="8dp"
-                android:background="@drawable/table_border"/>
-        </TableRow>
-    </TableLayout>
+                <TableRow
+                    android:id="@+id/overview_cost_table_row_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/overview_cost_table_row_1_column_1"
+                        android:background="@drawable/table_border"
+                        android:padding="8dp"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/overview_cost_table_row_1_column_2"
+                        android:background="@drawable/table_border"
+                        android:padding="8dp"
+                        android:text="1 Day" />
+
+                    <TextView
+                        android:id="@+id/overview_cost_table_row_1_column_3"
+                        android:background="@drawable/table_border"
+                        android:padding="8dp"
+                        android:text="10 Days" />
+
+                    <TextView
+                        android:id="@+id/overview_cost_table_row_1_column_4"
+                        android:background="@drawable/table_border"
+                        android:padding="8dp"
+                        android:text="100 Days" />
+
+                    <TextView
+                        android:id="@+id/overview_cost_table_row_1_column_5"
+                        android:background="@drawable/table_border"
+                        android:padding="8dp"
+                        android:text="1,000 Days" />
+                </TableRow>
+            </TableLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

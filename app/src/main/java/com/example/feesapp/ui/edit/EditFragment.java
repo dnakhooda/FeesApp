@@ -39,13 +39,9 @@ public class EditFragment extends Fragment {
 
         binding.addFeeButtonEdit.setOnClickListener(view -> navController.navigate(R.id.action_navigation_edit_to_navigation_add_item));
 
-        makeEditLayouts(mainActivity.getFees());
+        mainActivity.getFees().forEach(this::makeEditLayout);
 
         return binding.getRoot();
-    }
-
-    private void makeEditLayouts(ArrayList<Fee> fees) {
-        fees.forEach(this::makeEditLayout);
     }
 
     private void makeEditLayout(Fee fee) {

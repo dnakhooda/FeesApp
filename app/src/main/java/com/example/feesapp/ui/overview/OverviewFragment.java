@@ -1,9 +1,11 @@
 package com.example.feesapp.ui.overview;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -18,6 +20,11 @@ import com.example.feesapp.MainActivity;
 import com.example.feesapp.R;
 import com.example.feesapp.databinding.FragmentOverviewBinding;
 
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
+
+import java.util.ArrayList;
+
 public class OverviewFragment extends Fragment {
 
     private FragmentOverviewBinding binding;
@@ -30,6 +37,7 @@ public class OverviewFragment extends Fragment {
         binding = FragmentOverviewBinding.inflate(inflater, container, false);
         MainActivity.instance.bringBackViewBar();
         View root = binding.getRoot();
+
         return root;
     }
 
@@ -41,6 +49,30 @@ public class OverviewFragment extends Fragment {
         calculateOverviewCostTable(overviewCostTable);
         makeTable();
         updateOverviewTable(binding);
+
+        PieChart pieChart = binding.categoryPieChart;
+        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.FeesCategory.InsuranceFee), findPercentageByCategory(Fee.FeesCategory.InsuranceFee), Color.parseColor("#FE6DA8")));
+        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.FeesCategory.RentOrPropertyTaxFee), findPercentageByCategory(Fee.FeesCategory.RentOrPropertyTaxFee), Color.parseColor("#56B7F1")));
+        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.FeesCategory.MembershipFee), findPercentageByCategory(Fee.FeesCategory.MembershipFee), Color.parseColor("#CDA67F")));
+        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.FeesCategory.ServiceFee), findPercentageByCategory(Fee.FeesCategory.ServiceFee), Color.parseColor("#FED70E")));
+        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.FeesCategory.OtherFee), findPercentageByCategory(Fee.FeesCategory.OtherFee), Color.parseColor("#71c25f")));
+        pieChart.startAnimation();
+
+        binding.overviewLinearLayout.post(() -> {
+            binding.overviewLinearLayout.setMinimumHeight(((ScrollView)binding.overviewLinearLayout.getParent()).getHeight());
+        });
+    }
+
+    public int findPercentageByCategory(Fee.FeesCategory feesCategory) {
+        ArrayList<Fee> fees = MainActivity.instance.getFees();
+        double total = 0;
+        double totalCategory = 0;
+        for (int i = 0; i < fees.size(); i++) {
+            if (fees.get(i).getCategory().equals(feesCategory))
+                totalCategory += fees.get(i).getDailyAmount();
+            total += fees.get(i).getDailyAmount();
+        }
+        return (int) ((totalCategory / total) * 100);
     }
 
     private void calculateOverviewCostTable(double[][] overviewCostTable) {

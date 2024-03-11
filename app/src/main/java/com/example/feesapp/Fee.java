@@ -2,10 +2,11 @@ package com.example.feesapp;
 
 public class Fee {
     public enum FeesCategory {
-        ApplicationFee,
-        GovernmentFee,
+        InsuranceFee,
+        RentOrPropertyTaxFee,
         ServiceFee,
         MembershipFee,
+        OtherFee,
     }
 
     public enum ChargeRate {
@@ -31,6 +32,7 @@ public class Fee {
         return String.valueOf(value);
     }
 
+    private static final double DAYS_IN_WEEK = 7;
     private static final double DAYS_IN_MONTH = 30.437;
     private static final double DAYS_IN_YEAR = 365.25;
 
@@ -45,12 +47,14 @@ public class Fee {
         switch (feesCategory) {
             case ServiceFee:
                 return "Service Fee";
-            case GovernmentFee:
-                return "Government Fee";
+            case RentOrPropertyTaxFee:
+                return "Rent/Property Tax Fee";
             case MembershipFee:
                 return "Membership Fee";
-            case ApplicationFee:
-                return "Application Fee";
+            case InsuranceFee:
+                return "Insurance Fee";
+            case OtherFee:
+                return "Other Fee";
         }
         return null;
     }
@@ -90,13 +94,17 @@ public class Fee {
             case daily:
                 return amount;
             case weekly:
-                return amount/7;
+                return amount/DAYS_IN_WEEK;
             case monthly:
                 return amount/DAYS_IN_MONTH;
             case yearly:
                 return amount/DAYS_IN_YEAR;
         }
         return 0.0;
+    }
+
+    public double getMonthlyAmount() {
+        return getDailyAmount()*DAYS_IN_MONTH;
     }
 
     public ChargeRate getChargeRate() {

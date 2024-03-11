@@ -1,5 +1,6 @@
 package com.example.feesapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < fees.size(); i++) {
             if (fees.get(i).getTitle().equals(title)) {
                 fees.remove(i);
+                saveFees();
                 return true;
             }
         }
@@ -106,11 +108,10 @@ public class MainActivity extends AppCompatActivity {
             file.createNewFile();
             fileInputStream = new FileInputStream(file);
             fileInputStream.read(bytes);
-            String asString = Arrays.toString(bytes);
-            if (asString.equals("[]"))
+            String asString = new String(bytes);
+            if (asString.equals(""))
                 return;
 
-            System.out.println(asString);
             fees = gson.fromJson(asString, new TypeToken<ArrayList<Fee>>(){}.getType());
             fileInputStream.close();
         } catch (IOException e) {throw new RuntimeException(e);}
@@ -143,13 +144,24 @@ public class MainActivity extends AppCompatActivity {
             fileInputStream = new FileInputStream(file);
             fileInputStream.read(bytes);
             String asString = new String(bytes);
-            System.out.println(asString);
             if (asString.equals("[]") || asString.equals(""))
                 return;
 
             settings = gson.fromJson(asString, Settings.class);
             fileInputStream.close();
         } catch (IOException e) {throw new RuntimeException(e);}
+    }
+
+    public int redToGreenColorLeve(double x) {
+        x += 500;
+        if (x > 1000)
+            x = 1000;
+
+        double r = (255 * ((1000-x)/1000));
+        double g = (255 * (x/1000));
+        System.out.println(r);
+        System.out.println(g);
+        return Color.rgb((int) r, (int) g, 0);
     }
 
     public void removeNavBar() {

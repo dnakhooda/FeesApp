@@ -26,11 +26,7 @@
                 android:fontFamily="sans-serif-light"
                 android:textSize="40sp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/edit_title_title"
@@ -135,17 +131,17 @@
                     android:textSize="20sp" />
 
                 <RadioButton
-                    android:id="@+id/edit_application_fee_button"
+                    android:id="@+id/edit_insurance_fee_button"
                     android:layout_width="150dp"
                     android:layout_height="48dp"
-                    android:text="Application Fee"
+                    android:text="Insurance Fee"
                     android:textColor="@color/white" />
 
                 <RadioButton
-                    android:id="@+id/edit_government_fee_button"
+                    android:id="@+id/edit_rent_fee_button"
                     android:layout_width="150dp"
                     android:layout_height="48dp"
-                    android:text="Government Fee"
+                    android:text="Rent/Property Tax Fee"
                     android:textColor="@color/white" />
 
                 <RadioButton
@@ -160,6 +156,13 @@
                     android:layout_width="150dp"
                     android:layout_height="48dp"
                     android:text="Membership Fee"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/edit_other_fee_button"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:text="Other Fee"
                     android:textColor="@color/white" />
 
             </RadioGroup>

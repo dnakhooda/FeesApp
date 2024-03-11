@@ -69,12 +69,12 @@ public class EditItemFragment extends Fragment {
 
         if (fee.getCategory().equals(Fee.FeesCategory.ServiceFee))
             binding.editServiceFeeButton.setChecked(true);
-        else if (fee.getCategory().equals(Fee.FeesCategory.ApplicationFee))
-            binding.editApplicationFeeButton.setChecked(true);
+        else if (fee.getCategory().equals(Fee.FeesCategory.InsuranceFee))
+            binding.editInsuranceFeeButton.setChecked(true);
         else if (fee.getCategory().equals(Fee.FeesCategory.MembershipFee))
             binding.editMembershipFeeButton.setChecked(true);
         else
-            binding.editGovernmentFeeButton.setChecked(true);
+            binding.editRentFeeButton.setChecked(true);
     }
 
     private boolean changeFee() {
@@ -138,12 +138,14 @@ public class EditItemFragment extends Fragment {
         Fee.FeesCategory category;
 
         int categoryCheckedId = MainActivity.instance.findViewById(binding.editCategoryGroup.getCheckedRadioButtonId()).getId();
-        if (categoryCheckedId == binding.editApplicationFeeButton.getId())
-            category = Fee.FeesCategory.ApplicationFee;
-        else if (categoryCheckedId == binding.editGovernmentFeeButton.getId())
-            category = Fee.FeesCategory.GovernmentFee;
+        if (categoryCheckedId == binding.editInsuranceFeeButton.getId())
+            category = Fee.FeesCategory.InsuranceFee;
+        else if (categoryCheckedId == binding.editRentFeeButton.getId())
+            category = Fee.FeesCategory.RentOrPropertyTaxFee;
         else if (categoryCheckedId == binding.editServiceFeeButton.getId())
             category = Fee.FeesCategory.ServiceFee;
+        else if (categoryCheckedId == binding.editOtherFeeButton.getId())
+            category = Fee.FeesCategory.OtherFee;
         else
             category = Fee.FeesCategory.MembershipFee;
 
