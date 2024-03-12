@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +22,18 @@ import com.example.feesapp.MainActivity;
 import com.example.feesapp.R;
 import com.example.feesapp.databinding.FragmentSimulateExpensesBinding;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class SimulateExpensesFragment extends Fragment {
 
     private MainActivity mainActivity;
     private FragmentSimulateExpensesBinding binding;
-    private ArrayList<String> notOnTitle = new ArrayList<>();
+    private final ArrayList<String> notOnTitle = new ArrayList<>();
+    private final Stack<ActionSimulateExpenses> undoStack = new Stack<>();
+    private final ArrayList<View> inflatedLayouts = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,11 +53,34 @@ public class SimulateExpensesFragment extends Fragment {
                 saveInformation();
         });
 
+        binding.undoButton.setOnClickListener((View view) -> {
+            if (!undoStack.isEmpty()) {
+                ActionSimulateExpenses action = undoStack.pop();
+                System.out.println(undoStack);
+                undo(action);
+            }
+            System.out.println(undoStack);
+        });
+
         setInputs();
 
         calculateSimulatedCost();
 
         return root;
+    }
+
+    private void undo(ActionSimulateExpenses action) {
+        for (int i = 0; i < inflatedLayouts.size(); i++) {
+            View inflatedLayout = inflatedLayouts.get(i);
+            TextView title = inflatedLayout.findViewById(R.id.simulate_fee_title);
+            if (title.getText().equals(action.getFeeTitle())) {
+                SwitchCompat switchButton = inflatedLayout.findViewById(R.id.simulate_fee_switch);
+                switchButton.setTag(false);
+                switchButton.setChecked(!action.isTurnOn());
+                switchButton.setTag(true);
+            }
+        }
+        calculateSimulatedCost();
     }
 
     private void calculateSimulatedCost() {
@@ -127,15 +155,21 @@ public class SimulateExpensesFragment extends Fragment {
         cost.setText(feeString);
 
         SwitchCompat switchButton = inflatedLayout.findViewById(R.id.simulate_fee_switch);
+        switchButton.setTag(true);
         switchButton.setChecked(true);
         switchButton.setOnCheckedChangeListener((CompoundButton view, boolean isChecked) -> {
-            if (isChecked)
-                notOnTitle.remove(fee.getTitle());
-            else
-                notOnTitle.add(fee.getTitle());
-            calculateSimulatedCost();
+            if (view.getTag().equals(true)) {
+                undoStack.push(new ActionSimulateExpenses(isChecked, fee.getTitle()));
+
+                if (isChecked)
+                    notOnTitle.remove(fee.getTitle());
+                else
+                    notOnTitle.add(fee.getTitle());
+                calculateSimulatedCost();
+            }
         });
 
+        inflatedLayouts.add(inflatedLayout);
         simulateLinearLayout.addView(inflatedLayout);
     }
 
