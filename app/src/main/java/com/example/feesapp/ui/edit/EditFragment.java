@@ -9,62 +9,68 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.feesapp.Fee;
 import com.example.feesapp.MainActivity;
 import com.example.feesapp.R;
 import com.example.feesapp.databinding.FragmentEditBinding;
-import com.example.feesapp.databinding.FragmentOverviewBinding;
-import com.example.feesapp.ui.addItem.AddItemFragment;
-
-import java.util.ArrayList;
-import java.util.Objects;
 
 public class EditFragment extends Fragment {
-    private MainActivity mainActivity;
+
     private FragmentEditBinding binding;
+    private MainActivity mainActivity;
     private NavController navController;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Get Edit View Model
-        EditViewModel viewModel = new ViewModelProvider(this).get(EditViewModel.class);
+        // Get Binding
         binding = FragmentEditBinding.inflate(inflater, container, false);
+
+        // Set Main Activity Reference & Add Navigation Bar
         mainActivity = MainActivity.instance;
-        mainActivity.bringBackViewBar();
+        mainActivity.bringBackNavBar();
+
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_activity_main);
 
+        // Set Add Fee Button Click Event Listener
         binding.addFeeButtonEdit.setOnClickListener(view -> navController.navigate(R.id.action_navigation_edit_to_navigation_add_item));
 
+        // Inflate Layouts For Each Fee
         mainActivity.getFees().forEach(this::makeEditLayout);
 
         return binding.getRoot();
     }
 
     private void makeEditLayout(Fee fee) {
-        LinearLayout editLinearLayout = binding.linearLayoutEdit;
-        LayoutInflater inflater = mainActivity.getLayoutInflater();
-        View inflatedLayout = inflater.inflate(R.layout.edit_fee, editLinearLayout, false);
+        // Get Main Edit Page Linear Layout
+        LinearLayout linearLayout = binding.linearLayoutEdit;
 
+        // Inflate Edit Fee Item Layout
+        LayoutInflater inflater = mainActivity.getLayoutInflater();
+        View inflatedLayout = inflater.inflate(R.layout.item_edit_fee, linearLayout, false);
+
+        // Set Title
         TextView title = inflatedLayout.findViewById(R.id.edit_fee_title);
         title.setText(fee.getTitle());
 
+        // Set Category
         TextView category = inflatedLayout.findViewById(R.id.edit_fee_category);
         category.setText(Fee.changeFeeCategoryToString(fee.getCategory()));
 
+        // Set Charge Rate
         TextView cost = inflatedLayout.findViewById(R.id.edit_fee_cost);
         String feeString = mainActivity.currencyToSymbol(mainActivity.getSettings().getCurrencyType()) + Fee.numberToStringWithTwoDecimals(fee.getAmount()) + " " + Fee.changeChargeRateToString(fee.getChargeRate());
         cost.setText(feeString);
 
+        // Set Edit Button Click Event Listener
         inflatedLayout.findViewById(R.id.edit_fee_button).setOnClickListener(view -> {
-            MainActivity.instance.setFeeToEdit(fee);
+            mainActivity.setFeeToEdit(fee);
             navController.navigate(R.id.action_navigation_edit_to_navigation_edit_item);
         });
 
-        editLinearLayout.addView(inflatedLayout);
+        // Add Inflated Layout To Linear Layout
+        linearLayout.addView(inflatedLayout);
     }
 
     @Override

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/edit_fee_border"
+    android:background="@drawable/border_item_edit_fee"
     android:layout_width="375dp"
     android:layout_height="120dp"
     android:layout_margin="8dp"
@@ -54,7 +54,7 @@
         android:id="@+id/edit_fee_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_green_buttons_border"
+        android:background="@drawable/border_rounded_button_green"
         android:text="@string/edit_fee_button_text"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"

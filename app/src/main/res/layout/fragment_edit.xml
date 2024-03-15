@@ -47,7 +47,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/add_fee_button_edit"
-                android:background="@drawable/rounded_green_buttons_border"
+                android:background="@drawable/border_rounded_button_green"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="+"

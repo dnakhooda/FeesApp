@@ -62,7 +62,7 @@
                     android:layout_width="200dp"
                     android:layout_height="48dp"
                     android:layout_marginBottom="12dp"
-                    android:background="@drawable/text_field_border"
+                    android:background="@drawable/border_text_field"
                     android:elevation="4dp"
                     android:hint="Input Monthly Earning"
                     android:inputType="number|numberDecimal"
@@ -74,7 +74,7 @@
                 android:id="@+id/undo_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_white_buttons_border"
+                android:background="@drawable/border_rounded_button_white"
                 android:text="Undo"
                 android:layout_margin="15dp"/>
 

@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.feesapp.Fee;
 import com.example.feesapp.MainActivity;
@@ -24,17 +23,20 @@ import java.util.ArrayList;
 public class CalculateIncomeFragment extends Fragment {
 
     private FragmentCalculateIncomeBinding binding;
+    private MainActivity mainActivity;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Get Calculate Income View Model
-        CalculateIncomeViewModel viewModel = new ViewModelProvider(this).get(CalculateIncomeViewModel.class);
-
+        // Get Binding
         binding = FragmentCalculateIncomeBinding.inflate(inflater, container, false);
-        MainActivity.instance.bringBackViewBar();
-        View root = binding.getRoot();
 
+        // Set Main Activity Reference & Add Navigation Bar
+        mainActivity = MainActivity.instance;
+        mainActivity.bringBackNavBar();
+
+        // Set Calculate Button Click Event Listener
         binding.calculateIncomeButton.setOnClickListener(e -> calculate());
 
+        // Save Monthly Earnings & Savings When Text Fields Unselected
         binding.inputSavingsTextField.setOnFocusChangeListener((View view, boolean hasFocus) -> {
             if (!hasFocus)
                 saveInformation();
@@ -45,84 +47,81 @@ public class CalculateIncomeFragment extends Fragment {
                 saveInformation();
         });
 
-        setInputs();
+        // Set Text Fields With Saved Inputs
+        setTextFields();
 
-        return root;
+        return binding.getRoot();
     }
 
     private void calculate() {
-        double income = 0;
+        // Get Monthly Income & Check If Monthly Income Is Valid
+        double monthlyIncome;
         try {
-            income = Double.parseDouble(binding.inputMonthlyEarningTitleTextField.getText().toString());
+            monthlyIncome = Double.parseDouble(binding.inputMonthlyEarningTitleTextField.getText().toString());
         }
         catch (NumberFormatException exception) {
-            Toast.makeText(MainActivity.instance, "Illegal Input For Income!", Toast.LENGTH_LONG).show();
+            Toast.makeText(mainActivity, "Illegal Input For Monthly Income!", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if ((income * 100) % 1 > 0) {
-            Toast.makeText(MainActivity.instance, "Income Cannot Have More Than Two Decimal Places!", Toast.LENGTH_LONG).show();
+        if (mainActivity.isAmountValid(monthlyIncome, "Monthly Income"))
             return;
-        }
 
-        if (income > 1000000000) {
-            Toast.makeText(MainActivity.instance, "Income Cost Is Too Large Of A Value!", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        double savings = 0;
+        // Get Total Savings & Check If Total Savings Is Valid
+        double totalSavings;
         try {
-            savings = Double.parseDouble(binding.inputSavingsTextField.getText().toString());
+            totalSavings = Double.parseDouble(binding.inputSavingsTextField.getText().toString());
         }
         catch (NumberFormatException exception) {
-            Toast.makeText(MainActivity.instance, "Illegal Input For Savings!", Toast.LENGTH_LONG).show();
+            Toast.makeText(mainActivity, "Illegal Input For Savings!", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if ((savings * 100) % 1 > 0) {
-            Toast.makeText(MainActivity.instance, "Savings Cannot Have More Than Two Decimal Places!", Toast.LENGTH_LONG).show();
+        if (mainActivity.isAmountValid(totalSavings, "Total Savings"))
             return;
-        }
 
-        if (savings > 1000000000) {
-            Toast.makeText(MainActivity.instance, "Savings Cost Is Too Large Of A Value!", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        double expenses = 0;
-        ArrayList<Fee> fees = MainActivity.instance.getFees();
+        // Calculate Total Monthly Expenses From Fees
+        double totalMonthlyExpenses = 0;
+        ArrayList<Fee> fees = mainActivity.getFees();
         for (int i = 0; i < fees.size(); i++)
-            expenses += fees.get(i).getMonthlyAmount();
+            totalMonthlyExpenses += fees.get(i).getMonthlyAmount();
 
-        double netProfit = income - expenses;
+        // Calculate Net Monthly Profit
+        double netMonthlyProfit = monthlyIncome - totalMonthlyExpenses;
 
-        String netProfitTitleText = "Net Profit Per Month: " + Fee.roundToTwoDecimalPlaces(netProfit);
+        // Display Net Profit
+        String netProfitTitleText = "Net Profit Per Month: " + mainActivity.currencyToSymbol(mainActivity.getSettings().getCurrencyType()) + Fee.numberToStringWithTwoDecimals(Fee.roundToTwoDecimalPlaces(netMonthlyProfit));
         binding.netProfitTitle.setText(netProfitTitleText);
-        binding.netProfitTitle.setTextColor(MainActivity.instance.redToGreenColorLeve(netProfit));
+        binding.netProfitTitle.setTextColor(mainActivity.redToGreenColorLeve(netMonthlyProfit));
 
+        // Set Line Chart For Earnings Over 5 Months
         ValueLineChart chart = binding.incomeChart;
         chart.clearChart();
+
         ValueLineSeries series = new ValueLineSeries();
         series.setColor(0xFF56B7F1);
 
         for (int i = 1; i <= 5; i++)
-            series.addPoint(new ValueLinePoint("Month " + i, (float) Fee.roundToTwoDecimalPlaces(savings + netProfit*i)));
+            series.addPoint(new ValueLinePoint("Month " + i, (float) Fee.roundToTwoDecimalPlaces(totalSavings + netMonthlyProfit*i)));
 
         chart.addSeries(series);
         chart.startAnimation();
 
+        // Save Monthly Income & Total Savings
         saveInformation();
     }
 
-    private void setInputs() {
-        if (MainActivity.instance.getSettings().getMonthlyEarnings() != 0)
-            binding.inputMonthlyEarningTitleTextField.setText(String.valueOf(MainActivity.instance.getSettings().getMonthlyEarnings()));
-        if (MainActivity.instance.getSettings().getTotalSavings() != 0)
-            binding.inputSavingsTextField.setText(String.valueOf(MainActivity.instance.getSettings().getTotalSavings()));
+    private void setTextFields() {
+        // Set Text Fields With Saved Inputs
+        if (mainActivity.getSettings().getMonthlyEarnings() != 0)
+            binding.inputMonthlyEarningTitleTextField.setText(Fee.numberToStringWithTwoDecimals(mainActivity.getSettings().getMonthlyEarnings()));
+        if (mainActivity.getSettings().getTotalSavings() != 0)
+            binding.inputSavingsTextField.setText(Fee.numberToStringWithTwoDecimals(mainActivity.getSettings().getTotalSavings()));
     }
 
     private void saveInformation() {
-        double income = 0;
+        // Save Monthly Income In Settings Object
+        double income;
         try {
             income = Double.parseDouble(binding.inputMonthlyEarningTitleTextField.getText().toString());
         }
@@ -130,7 +129,10 @@ public class CalculateIncomeFragment extends Fragment {
             return;
         }
 
-        double savings = 0;
+        mainActivity.getSettings().setMonthlyEarnings(income);
+
+        // Save Total Savings In Settings Object
+        double savings;
         try {
             savings = Double.parseDouble(binding.inputSavingsTextField.getText().toString());
         }
@@ -138,8 +140,7 @@ public class CalculateIncomeFragment extends Fragment {
             return;
         }
 
-        MainActivity.instance.getSettings().setMonthlyEarnings(income);
-        MainActivity.instance.getSettings().setTotalSavings(savings);
+        mainActivity.getSettings().setTotalSavings(savings);
     }
 
     @Override

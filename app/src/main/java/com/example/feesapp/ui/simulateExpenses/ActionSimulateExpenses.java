@@ -1,8 +1,8 @@
 package com.example.feesapp.ui.simulateExpenses;
 
 public class ActionSimulateExpenses {
-    private boolean turnOn;
 
+    private boolean turnOn;
     private String feeTitle;
 
     public ActionSimulateExpenses(boolean turnOn, String feeTitle) {
@@ -10,6 +10,7 @@ public class ActionSimulateExpenses {
         this.feeTitle = feeTitle;
     }
 
+    // Getters
     public String getFeeTitle() {
         return feeTitle;
     }
@@ -18,6 +19,7 @@ public class ActionSimulateExpenses {
         return turnOn;
     }
 
+    // Setters
     public void setFeeTitle(String feeTitle) {
         this.feeTitle = feeTitle;
     }

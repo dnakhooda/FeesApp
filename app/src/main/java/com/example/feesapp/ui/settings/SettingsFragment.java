@@ -4,21 +4,20 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import com.example.feesapp.MainActivity;
 import com.example.feesapp.databinding.FragmentSettingsBinding;
 
-import java.util.Currency;
-
 public class SettingsFragment extends Fragment {
+
+    private FragmentSettingsBinding binding;
+    private MainActivity mainActivity;
     public enum Currency {
         USDollar,
         Euro,
@@ -31,24 +30,29 @@ public class SettingsFragment extends Fragment {
         HongKongDollar,
         SingaporeDollar,
     }
-    private FragmentSettingsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Get Settings View Model
-        SettingsViewModel viewModel = new ViewModelProvider(this).get(SettingsViewModel.class);
-
+        // Get Binding
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
-        MainActivity.instance.bringBackViewBar();
-        View root = binding.getRoot();
 
-        setCurrentCheck(binding);
+        // Set Main Activity Reference & Add Navigation Bar
+        mainActivity = MainActivity.instance;
+        mainActivity.bringBackNavBar();
+
+        // Set What Currency Should Be Selected
+        setCurrencyChecked(binding);
+
+        // Set On Currency Change Event Listener
         binding.settingsCurrencyGroup.setOnCheckedChangeListener(this::onCheck);
 
-        return root;
+        return binding.getRoot();
     }
 
-    private void setCurrentCheck(FragmentSettingsBinding binding) {
-        switch (MainActivity.instance.getSettings().getCurrencyType()) {
+    private void setCurrencyChecked(FragmentSettingsBinding binding) {
+        // Get Currency In Settings Object & Set That Currency In Radio Group To Checked
+        Currency currency = mainActivity.getSettings().getCurrencyType();
+
+        switch (currency) {
             case USDollar:
                 binding.currencyButtonUsDollar.setChecked(true);
                 break;
@@ -83,57 +87,60 @@ public class SettingsFragment extends Fragment {
     }
 
     private void onCheck(RadioGroup group, int checkedId) {
+        // Get Button That Was Changed & See If It Is Now Checked & Get Settings Object
         RadioButton checkedRadioButton = group.findViewById(checkedId);
 
         if (!checkedRadioButton.isChecked())
             return;
 
+        Settings settings = mainActivity.getSettings();
+
         if (checkedRadioButton.getId() == binding.currencyButtonUsDollar.getId()) {
-            MainActivity.instance.getSettings().setCurrencyType(Currency.USDollar);
+            settings.setCurrencyType(Currency.USDollar);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonEuro.getId()) {
-            MainActivity.instance.getSettings().setCurrencyType(Currency.Euro);
+            settings.setCurrencyType(Currency.Euro);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonYen.getId()) {
-            MainActivity.instance.getSettings().setCurrencyType(Currency.Yen);
+            settings.setCurrencyType(Currency.Yen);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonSterling.getId()) {
-            MainActivity.instance.getSettings().setCurrencyType(Currency.Sterling);
+            settings.setCurrencyType(Currency.Sterling);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonRenminbi.getId()) {
-            MainActivity.instance.getSettings().setCurrencyType(Currency.Renminbi);
+            settings.setCurrencyType(Currency.Renminbi);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonAusDollar.getId()) {
-            MainActivity.instance.getSettings().setCurrencyType(Currency.AustralianDollar);
+            settings.setCurrencyType(Currency.AustralianDollar);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonCanadianDollar.getId()) {
-            MainActivity.instance.getSettings().setCurrencyType(Currency.CanadianDollar);
+            settings.setCurrencyType(Currency.CanadianDollar);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonSwissDollar.getId()) {
-            MainActivity.instance.getSettings().setCurrencyType(Currency.SwissFranc);
+            settings.setCurrencyType(Currency.SwissFranc);
             return;
         }
 
         if (checkedRadioButton.getId() == binding.currencyButtonHkDollar.getId()) {
-            MainActivity.instance.getSettings().setCurrencyType(Currency.HongKongDollar);
+            settings.setCurrencyType(Currency.HongKongDollar);
             return;
         }
 
-        MainActivity.instance.getSettings().setCurrencyType(Currency.SingaporeDollar);
+        settings.setCurrencyType(Currency.SingaporeDollar);
     }
 
     @Override

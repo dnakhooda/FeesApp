@@ -1,7 +1,27 @@
 package com.example.feesapp;
 
 public class Fee {
-    public enum FeesCategory {
+
+    // Time Duration Constants
+    private static final double DAYS_IN_WEEK = 7;
+    private static final double DAYS_IN_MONTH = 30.437;
+    private static final double DAYS_IN_YEAR = 365.25;
+
+    // Static Methods For Converting & Displaying Charge Rate Amounts
+    public static double roundToTwoDecimalPlaces(double value) {
+        int tempInt = (int) (value * 100);
+        return tempInt/100.0;
+    }
+
+    public static String numberToStringWithTwoDecimals(double value) {
+        if ((value * 10) % 10 == 0 || (value * 100) % 10 == 0)
+            return value + "0";
+        return String.valueOf(value);
+    }
+
+
+    // Category & Charge Rate Enumerations
+    public enum Category {
         InsuranceFee,
         RentOrPropertyTaxFee,
         ServiceFee,
@@ -19,31 +39,17 @@ public class Fee {
     private String title;
     private double amount;
     private ChargeRate chargeRate;
-    private FeesCategory category;
+    private Category category;
 
-    public static double roundToTwoDecimalPlaces(double value) {
-        int tempInt = (int) (value * 100);
-        return tempInt/100.0;
-    }
-
-    public static String numberToStringWithTwoDecimals(double value) {
-        if ((value * 10) % 10 == 0 || (value * 100) % 10 == 0)
-            return value + "0";
-        return String.valueOf(value);
-    }
-
-    private static final double DAYS_IN_WEEK = 7;
-    private static final double DAYS_IN_MONTH = 30.437;
-    private static final double DAYS_IN_YEAR = 365.25;
-
-    public Fee(String title, double amount, ChargeRate chargeRate, FeesCategory category) {
+    public Fee(String title, double amount, ChargeRate chargeRate, Category category) {
         this.title = title;
         setAmount(amount);
         this.chargeRate = chargeRate;
         this.category = category;
     }
 
-    public static String changeFeeCategoryToString(FeesCategory feesCategory) {
+    // Convert Enumerations Into Strings
+    public static String changeFeeCategoryToString(Category feesCategory) {
         switch (feesCategory) {
             case ServiceFee:
                 return "Service Fee";
@@ -73,22 +79,7 @@ public class Fee {
         return null;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = roundToTwoDecimalPlaces(amount);
-    }
-
+    // Calculate Daily Cost Amount
     public double getDailyAmount() {
         switch (chargeRate) {
             case daily:
@@ -103,6 +94,19 @@ public class Fee {
         return 0.0;
     }
 
+    // Getters
+    public String getTitle() {
+        return title;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
     public double getMonthlyAmount() {
         return getDailyAmount()*DAYS_IN_MONTH;
     }
@@ -111,15 +115,21 @@ public class Fee {
         return chargeRate;
     }
 
+    // Setters
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = roundToTwoDecimalPlaces(amount);
+    }
+
     public void setChargeRate(ChargeRate chargeRate) {
         this.chargeRate = chargeRate;
     }
 
-    public FeesCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(FeesCategory category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
+
 }

@@ -72,31 +72,31 @@
 
                     <TextView
                         android:id="@+id/overview_cost_table_row_1_column_1"
-                        android:background="@drawable/table_border"
+                        android:background="@drawable/border_table_cell"
                         android:padding="8dp"
                         android:text="" />
 
                     <TextView
                         android:id="@+id/overview_cost_table_row_1_column_2"
-                        android:background="@drawable/table_border"
+                        android:background="@drawable/border_table_cell"
                         android:padding="8dp"
                         android:text="1 Day" />
 
                     <TextView
                         android:id="@+id/overview_cost_table_row_1_column_3"
-                        android:background="@drawable/table_border"
+                        android:background="@drawable/border_table_cell"
                         android:padding="8dp"
                         android:text="10 Days" />
 
                     <TextView
                         android:id="@+id/overview_cost_table_row_1_column_4"
-                        android:background="@drawable/table_border"
+                        android:background="@drawable/border_table_cell"
                         android:padding="8dp"
                         android:text="100 Days" />
 
                     <TextView
                         android:id="@+id/overview_cost_table_row_1_column_5"
-                        android:background="@drawable/table_border"
+                        android:background="@drawable/border_table_cell"
                         android:padding="8dp"
                         android:text="1,000 Days" />
                 </TableRow>

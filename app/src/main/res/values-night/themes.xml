@@ -11,7 +11,7 @@
         <item name="colorOnSecondary">@color/light_green</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">#1A1A1A</item>
+        <item name="android:statusBarColor">@color/dark_gray</item>
 
         <!-- Navigation bar color -->
         <item name="android:navigationBarColor">@color/gray</item>

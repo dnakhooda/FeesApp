@@ -6,25 +6,25 @@
     <TextView
         android:id="@+id/overview_cost_table_row_column_1"
         android:padding="8dp"
-        android:background="@drawable/table_border"/>
+        android:background="@drawable/border_table_cell"/>
 
     <TextView
         android:id="@+id/overview_cost_table_row_column_2"
         android:padding="8dp"
-        android:background="@drawable/table_border"/>
+        android:background="@drawable/border_table_cell"/>
 
     <TextView
         android:id="@+id/overview_cost_table_row_column_3"
         android:padding="8dp"
-        android:background="@drawable/table_border"/>
+        android:background="@drawable/border_table_cell"/>
 
     <TextView
         android:id="@+id/overview_cost_table_row_column_4"
         android:padding="8dp"
-        android:background="@drawable/table_border"/>
+        android:background="@drawable/border_table_cell"/>
 
     <TextView
         android:id="@+id/overview_cost_table_row_column_5"
         android:padding="8dp"
-        android:background="@drawable/table_border"/>
+        android:background="@drawable/border_table_cell"/>
 </TableRow>

@@ -3,7 +3,9 @@ package com.example.feesapp;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.feesapp.ui.adts.FeesArrayList;
 import com.example.feesapp.ui.settings.Settings;
 import com.example.feesapp.ui.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -14,29 +16,24 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.feesapp.databinding.ActivityMainBinding;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
+
     public static MainActivity instance;
-    private ArrayList<Fee> fees = new ArrayList<>();
     private ActivityMainBinding binding;
+    private FeesArrayList fees;
+    private Settings settings;
+    private StorageHandler storageHandler;
     private Fee feeToEdit = null;
-    private Settings settings = new Settings();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Set Instance
         instance = this;
 
+        // Get Binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -45,135 +42,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(navView, navController);
 
-        getSavedFees();
-        getSavedSettings();
+        fees = new FeesArrayList();
+        settings = new Settings();
+        storageHandler = new StorageHandler();
+
+        // Get Saved Information
+        storageHandler.getSavedFees();
+        storageHandler.getSavedSettings();
     }
 
-    public Fee getFeeByTitle(String title) {
-        for (int i = 0; i < fees.size(); i++) {
-            if (fees.get(i).getTitle().equals(title))
-                return fees.get(i);
-        }
-        return null;
-    }
-
-    public boolean removeFeeByTitle(String title) {
-        for (int i = 0; i < fees.size(); i++) {
-            if (fees.get(i).getTitle().equals(title)) {
-                fees.remove(i);
-                saveFees();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void clearFiles() {
-        File file = getApplication().getFilesDir();
-        try {
-            FileOutputStream fileOutputStreamFees = new FileOutputStream(new File(file, "Fees.txt"));
-            FileOutputStream fileOutputStreamSettings = new FileOutputStream(new File(file, "FeeSettings.txt"));
-            fileOutputStreamFees.write("".getBytes());
-            fileOutputStreamSettings.write("".getBytes());
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void saveFees() {
-        try {
-            Gson gson = new Gson();
-            byte[] byteInformation = gson.toJson(fees).getBytes();
-
-            File file = getApplication().getFilesDir();
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(file, "Fees.txt"));
-            fileOutputStream.write(byteInformation);
-            fileOutputStream.close();
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void getSavedFees() {
-        Gson gson = new Gson();
-        File fileDirectory = getApplication().getFilesDir();
-        File file = new File(fileDirectory, "Fees.txt");
-        FileInputStream fileInputStream;
-        byte[] bytes = new byte[(int) file.length()];
-
-        try {
-            file.createNewFile();
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bytes);
-            String asString = new String(bytes);
-            if (asString.equals(""))
-                return;
-
-            fees = gson.fromJson(asString, new TypeToken<ArrayList<Fee>>(){}.getType());
-            fileInputStream.close();
-        } catch (IOException e) {throw new RuntimeException(e);}
-    }
-
-    public void saveSettings() {
-        try {
-            Gson gson = new Gson();
-            File filesDirectory = getApplication().getFilesDir();
-            FileOutputStream fileOutputStream = new FileOutputStream(new File(filesDirectory, "FeeSettings.txt"));
-            fileOutputStream.write(gson.toJson(settings).getBytes());
-            fileOutputStream.close();
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void getSavedSettings() {
-        Gson gson = new Gson();
-        File fileDirectory = getApplication().getFilesDir();
-
-        File file = new File(fileDirectory, "FeeSettings.txt");
-        FileInputStream fileInputStream;
-
-        byte[] bytes = new byte[(int) file.length()];
-
-        try {
-            file.createNewFile();
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bytes);
-            String asString = new String(bytes);
-            if (asString.equals("[]") || asString.equals(""))
-                return;
-
-            settings = gson.fromJson(asString, Settings.class);
-            fileInputStream.close();
-        } catch (IOException e) {throw new RuntimeException(e);}
-    }
-
-    public int redToGreenColorLeve(double x) {
-        x += 500;
-        if (x > 1000)
-            x = 1000;
-
-        double r = (255 * ((1000-x)/1000));
-        double g = (255 * (x/1000));
-        System.out.println(r);
-        System.out.println(g);
-        return Color.rgb((int) r, (int) g, 0);
-    }
-
-    public void removeNavBar() {
-        binding.navView.setVisibility(View.GONE);
-    }
-
-    public void bringBackViewBar() {
-        if (binding == null)
-            return;
-        binding.navView.setVisibility(View.VISIBLE);
-    }
-
+    // Convert Currency Enumeration Into Symbol
     public String currencyToSymbol(SettingsFragment.Currency currency) {
         switch (currency) {
             case USDollar:
@@ -200,19 +78,96 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    public ArrayList<Fee> getFees() {
+    // Error Checking For Title And Amounts
+    public boolean isFeeTitleValid(String title) {
+        if (title.length() < 1) {
+            Toast.makeText(this, "Title Must Be At Least One Character!", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        if (title.length() > 9) {
+            Toast.makeText(this, "Title Must Be Less Than Ten Characters!", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        if (fees.getFeeByTitle(title) != null) {
+            Toast.makeText(this, "Title Unique! No Two Fees Should Have The Same Title!", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean isAmountValid(double amount, String amountName) {
+        if ((amount * 100) % 1 > 0) {
+            Toast.makeText(this, amountName + " Cannot Have More Than Two Decimal Places!", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        if (amount > 10000000) {
+            Toast.makeText(this, amountName + " Is Too Large Of A Value!", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        return false;
+    }
+
+    // Determine Color (Red To Green) Given Net Profit (Negative: Red; Positive: Green;)
+    public int redToGreenColorLeve(double netProfit) {
+        netProfit += 500;
+        if (netProfit > 1000)
+            netProfit = 1000;
+        else if (netProfit < 0)
+            netProfit = 0;
+
+        double r = (255 * ((1000-netProfit)/1000));
+        double g = (255 * (netProfit/1000));
+        return Color.rgb((int) r, (int) g, 0);
+    }
+
+    // Add/Remove Nav Bar
+    public void bringBackNavBar() {
+        if (binding == null)
+            return;
+        binding.navView.setVisibility(View.VISIBLE);
+    }
+
+    public void removeNavBar() {
+        binding.navView.setVisibility(View.GONE);
+    }
+
+    // Getters
+    public FeesArrayList getFees() {
         return fees;
+    }
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public StorageHandler getStorageHandler() {
+        return storageHandler;
     }
 
     public Fee getFeeToEdit() {
         return feeToEdit;
     }
 
+    // Setters
+    public void setFees(FeesArrayList fees) {
+        this.fees = fees;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
+
+    public void setStorageHandler(StorageHandler storageHandler) {
+        this.storageHandler = storageHandler;
+    }
+
     public void setFeeToEdit(Fee feeToEdit) {
         this.feeToEdit = feeToEdit;
     }
 
-    public Settings getSettings() {
-        return settings;
-    }
 }

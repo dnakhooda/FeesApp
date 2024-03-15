@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -20,44 +19,51 @@ import com.example.feesapp.databinding.FragmentEditItemBinding;
 public class EditItemFragment extends Fragment {
 
     private FragmentEditItemBinding binding;
+    private MainActivity mainActivity;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Get Edit Item View Model
-        EditItemViewModel viewModel = new ViewModelProvider(this).get(EditItemViewModel.class);
-
+        // Get Binding
         binding = FragmentEditItemBinding.inflate(inflater, container, false);
-        MainActivity.instance.removeNavBar();
-        View root = binding.getRoot();
-        NavController navController = Navigation.findNavController(MainActivity.instance, R.id.nav_host_fragment_activity_main);
 
+        // Set Main Activity Reference & Remove Navigation Bar
+        mainActivity = MainActivity.instance;
+        mainActivity.removeNavBar();
+
+        NavController navController = Navigation.findNavController(mainActivity, R.id.nav_host_fragment_activity_main);
+
+        // Set Add Button & Delete Button & Cancel Button Click Event Listener
         binding.editChangeButton.setOnClickListener(view -> {
+            // If changeFee Returns True, An Error Has Occurred
             if (changeFee())
                 return;
 
             navController.popBackStack();
         });
 
-        binding.editCancelButton.setOnClickListener(view -> {
-            navController.popBackStack();
-        });
-
         binding.editDeleteButton.setOnClickListener(view -> {
-            MainActivity.instance.removeFeeByTitle(MainActivity.instance.getFeeToEdit().getTitle());
+            mainActivity.getFees().removeFeeByTitle(mainActivity.getFeeToEdit().getTitle());
             navController.popBackStack();
         });
 
+        binding.editCancelButton.setOnClickListener(view -> navController.popBackStack());
+
+        // Set Text Fields & Radio Groups With Fee
         setInputs();
 
-        return root;
+        return binding.getRoot();
     }
 
     private void setInputs() {
-        Fee fee = MainActivity.instance.getFeeToEdit();
+        // Get Fee Being Edited
+        Fee fee = mainActivity.getFeeToEdit();
 
-        binding.editTitleField.setText( fee.getTitle() );
+        // Set Title
+        binding.editTitleField.setText(fee.getTitle());
 
-        binding.editAmountField.setText( String.format( Double.toString( fee.getAmount() ) ) );
+        // Set Charge Rate Cost
+        binding.editAmountField.setText(Fee.numberToStringWithTwoDecimals(fee.getAmount()));
 
+        // Set Charge Rate
         if (fee.getChargeRate().equals(Fee.ChargeRate.daily))
             binding.editButtonDaily.setChecked(true);
         else if (fee.getChargeRate().equals(Fee.ChargeRate.weekly))
@@ -67,60 +73,46 @@ public class EditItemFragment extends Fragment {
         else
             binding.editButtonYearly.setChecked(true);
 
-        if (fee.getCategory().equals(Fee.FeesCategory.ServiceFee))
+        // Set Category
+        if (fee.getCategory().equals(Fee.Category.ServiceFee))
             binding.editServiceFeeButton.setChecked(true);
-        else if (fee.getCategory().equals(Fee.FeesCategory.InsuranceFee))
+        else if (fee.getCategory().equals(Fee.Category.InsuranceFee))
             binding.editInsuranceFeeButton.setChecked(true);
-        else if (fee.getCategory().equals(Fee.FeesCategory.MembershipFee))
+        else if (fee.getCategory().equals(Fee.Category.MembershipFee))
             binding.editMembershipFeeButton.setChecked(true);
         else
             binding.editRentFeeButton.setChecked(true);
     }
 
     private boolean changeFee() {
+        // Get Title & Check If Title Is Valid
         String title = binding.editTitleField.getText().toString();
-        if (title.length() < 1) {
-            Toast.makeText(MainActivity.instance, "Title Must Be At Least One Character!", Toast.LENGTH_LONG).show();
-            return true;
-        }
 
-        if (title.length() > 9) {
-            Toast.makeText(MainActivity.instance, "Title Must Be Less Than Ten Characters!", Toast.LENGTH_LONG).show();
+        if (mainActivity.isFeeTitleValid(title))
             return true;
-        }
 
-        if (MainActivity.instance.getFeeByTitle(title) != null && !MainActivity.instance.getFeeByTitle(title).equals(MainActivity.instance.getFeeToEdit())) {
-            Toast.makeText(MainActivity.instance, "Title Unique! No Two Fees Should Have The Same Title!", Toast.LENGTH_LONG).show();
-            return true;
-        }
-
-        double amount = 0;
+        // Get Charge Rate Cost & Check If Charge Rate Cost Is Valid
+        double chargeRateCost;
         try {
-            amount = Double.parseDouble(binding.editAmountField.getText().toString());
+            chargeRateCost = Double.parseDouble(binding.editAmountField.getText().toString());
         }
         catch (NumberFormatException exception) {
-            Toast.makeText(MainActivity.instance, "Illegal Input For Charge Rate Cost!", Toast.LENGTH_LONG).show();
+            Toast.makeText(mainActivity, "Illegal Input For Charge Rate Cost!", Toast.LENGTH_LONG).show();
             return true;
         }
 
-        if ((amount * 100) % 1 > 0) {
-            Toast.makeText(MainActivity.instance, "Charge Rate Cost Cannot Have More Than Two Decimal Places!", Toast.LENGTH_LONG).show();
+        if (mainActivity.isAmountValid(chargeRateCost, "Charge Rate Cost"))
             return true;
-        }
 
-        if (amount > 10000000) {
-            Toast.makeText(MainActivity.instance, "Charge Rate Cost Is Too Large Of A Value!", Toast.LENGTH_LONG).show();
-            return true;
-        }
-
+        // Get Charge Rate & Make Sure Charge Rate Is Selected
         Fee.ChargeRate chargeRate;
 
         if (binding.editRateGroup.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(MainActivity.instance, "A Charge Rate Must Be Selected!", Toast.LENGTH_LONG).show();
+            Toast.makeText(mainActivity, "A Charge Rate Must Be Selected!", Toast.LENGTH_LONG).show();
             return true;
         }
 
-        int rateCheckedId = MainActivity.instance.findViewById(binding.editRateGroup.getCheckedRadioButtonId()).getId();
+        int rateCheckedId = mainActivity.findViewById(binding.editRateGroup.getCheckedRadioButtonId()).getId();
         if (rateCheckedId == binding.editButtonDaily.getId())
             chargeRate = Fee.ChargeRate.daily;
         else if (rateCheckedId == binding.editButtonWeekly.getId())
@@ -130,31 +122,31 @@ public class EditItemFragment extends Fragment {
         else
             chargeRate = Fee.ChargeRate.yearly;
 
+        // Get Category & Make Sure Category Is Selected
+        Fee.Category category;
+
         if (binding.editCategoryGroup.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(MainActivity.instance, "A Category Must Be Selected!", Toast.LENGTH_LONG).show();
+            Toast.makeText(mainActivity, "A Category Must Be Selected!", Toast.LENGTH_LONG).show();
             return true;
         }
 
-        Fee.FeesCategory category;
-
-        int categoryCheckedId = MainActivity.instance.findViewById(binding.editCategoryGroup.getCheckedRadioButtonId()).getId();
+        int categoryCheckedId = mainActivity.findViewById(binding.editCategoryGroup.getCheckedRadioButtonId()).getId();
         if (categoryCheckedId == binding.editInsuranceFeeButton.getId())
-            category = Fee.FeesCategory.InsuranceFee;
+            category = Fee.Category.InsuranceFee;
         else if (categoryCheckedId == binding.editRentFeeButton.getId())
-            category = Fee.FeesCategory.RentOrPropertyTaxFee;
+            category = Fee.Category.RentOrPropertyTaxFee;
         else if (categoryCheckedId == binding.editServiceFeeButton.getId())
-            category = Fee.FeesCategory.ServiceFee;
+            category = Fee.Category.ServiceFee;
         else if (categoryCheckedId == binding.editOtherFeeButton.getId())
-            category = Fee.FeesCategory.OtherFee;
+            category = Fee.Category.OtherFee;
         else
-            category = Fee.FeesCategory.MembershipFee;
+            category = Fee.Category.MembershipFee;
 
-        MainActivity.instance.getFeeToEdit().setTitle(title);
-        MainActivity.instance.getFeeToEdit().setAmount(amount);
-        MainActivity.instance.getFeeToEdit().setChargeRate(chargeRate);
-        MainActivity.instance.getFeeToEdit().setCategory(category);
-
-        MainActivity.instance.saveFees();
+        // Change Fee & Save Fee
+        mainActivity.getFeeToEdit().setTitle(title);
+        mainActivity.getFeeToEdit().setAmount(chargeRateCost);
+        mainActivity.getFeeToEdit().setChargeRate(chargeRate);
+        mainActivity.getFeeToEdit().setCategory(category);
 
         return false;
     }

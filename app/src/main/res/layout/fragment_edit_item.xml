@@ -39,7 +39,7 @@
 
             <EditText
                 android:id="@+id/edit_title_field"
-                android:background="@drawable/text_field_border"
+                android:background="@drawable/border_text_field"
                 android:layout_width="200dp"
                 android:layout_height="48dp"
                 android:padding="10dp"
@@ -59,7 +59,7 @@
 
             <EditText
                 android:id="@+id/edit_amount_field"
-                android:background="@drawable/text_field_border"
+                android:background="@drawable/border_text_field"
                 android:layout_width="200dp"
                 android:layout_height="48dp"
                 android:padding="10dp"
@@ -177,7 +177,7 @@
                     android:id="@+id/edit_delete_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_dark_red_buttons_border"
+                    android:background="@drawable/border_rounded_button_red"
                     android:padding="10dp"
                     android:text="Delete"
                     android:textColor="@color/white"
@@ -191,7 +191,7 @@
                     android:id="@+id/edit_cancel_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_black_buttons_border"
+                    android:background="@drawable/border_rounded_button_black"
                     android:padding="10dp"
                     android:text="Cancel"
                     android:textColor="@color/white"
@@ -206,7 +206,7 @@
                     android:id="@+id/edit_change_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_white_buttons_border"
+                    android:background="@drawable/border_rounded_button_white"
                     android:padding="10dp"
                     android:text="Change"
                     android:textColor="@color/black"
