@@ -1,7 +1,6 @@
 package com.example.feesapp;
 
 public class Fee {
-
     // Time Duration Constants
     private static final double DAYS_IN_WEEK = 7;
     private static final double DAYS_IN_MONTH = 30.437;
@@ -19,7 +18,6 @@ public class Fee {
         return String.valueOf(value);
     }
 
-
     // Category & Charge Rate Enumerations
     public enum Category {
         InsuranceFee,
@@ -28,7 +26,6 @@ public class Fee {
         MembershipFee,
         OtherFee,
     }
-
     public enum ChargeRate {
         daily,
         weekly,
@@ -98,19 +95,15 @@ public class Fee {
     public String getTitle() {
         return title;
     }
-
     public Category getCategory() {
         return category;
     }
-
     public double getAmount() {
         return amount;
     }
-
     public double getMonthlyAmount() {
         return getDailyAmount()*DAYS_IN_MONTH;
     }
-
     public ChargeRate getChargeRate() {
         return chargeRate;
     }
@@ -119,15 +112,10 @@ public class Fee {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    public void setAmount(double amount) {
-        this.amount = roundToTwoDecimalPlaces(amount);
-    }
-
+    public void setAmount(double amount) {this.amount = roundToTwoDecimalPlaces(amount);}
     public void setChargeRate(ChargeRate chargeRate) {
         this.chargeRate = chargeRate;
     }
-
     public void setCategory(Category category) {
         this.category = category;
     }

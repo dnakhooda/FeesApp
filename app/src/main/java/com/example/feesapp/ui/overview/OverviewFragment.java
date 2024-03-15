@@ -57,11 +57,16 @@ public class OverviewFragment extends Fragment {
 
         // Add Pie Chart Categories
         PieChart pieChart = binding.categoryPieChart;
-        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.Category.InsuranceFee), categoryPercentage(Fee.Category.InsuranceFee), Color.parseColor("#FE6DA8")));
-        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.Category.RentOrPropertyTaxFee), categoryPercentage(Fee.Category.RentOrPropertyTaxFee), Color.parseColor("#56B7F1")));
-        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.Category.MembershipFee), categoryPercentage(Fee.Category.MembershipFee), Color.parseColor("#CDA67F")));
-        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.Category.ServiceFee), categoryPercentage(Fee.Category.ServiceFee), Color.parseColor("#FED70E")));
-        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.Category.OtherFee), categoryPercentage(Fee.Category.OtherFee), Color.parseColor("#71c25f")));
+        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.Category.InsuranceFee),
+                categoryPercentage(Fee.Category.InsuranceFee), Color.parseColor("#FE6DA8")));
+        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.Category.RentOrPropertyTaxFee),
+                categoryPercentage(Fee.Category.RentOrPropertyTaxFee), Color.parseColor("#56B7F1")));
+        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.Category.MembershipFee),
+                categoryPercentage(Fee.Category.MembershipFee), Color.parseColor("#CDA67F")));
+        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.Category.ServiceFee),
+                categoryPercentage(Fee.Category.ServiceFee), Color.parseColor("#FED70E")));
+        pieChart.addPieSlice(new PieModel(Fee.changeFeeCategoryToString(Fee.Category.OtherFee),
+                categoryPercentage(Fee.Category.OtherFee), Color.parseColor("#71c25f")));
         pieChart.startAnimation();
     }
 
