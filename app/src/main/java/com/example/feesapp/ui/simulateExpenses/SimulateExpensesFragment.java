@@ -94,7 +94,7 @@ public class SimulateExpensesFragment extends Fragment {
         // Display Net Profit & Change Text Color (Green Or Red Depending On Net Monthly Profit)
         String netProfitTitleText = "Net Profit Per Month: " + Fee.roundToTwoDecimalPlaces(netMonthlyProfit);
         binding.netProfitTitle.setText(netProfitTitleText);
-        binding.netProfitTitle.setTextColor(mainActivity.redToGreenColorLeve(netMonthlyProfit));
+        binding.netProfitTitle.setTextColor(mainActivity.redToGreenColorLevel(netMonthlyProfit));
 
         saveMonthlyIncomeInformation();
     }

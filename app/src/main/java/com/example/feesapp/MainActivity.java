@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Determine Color (Red To Green) Given Net Profit (Negative: Red; Positive: Green;)
-    public int redToGreenColorLeve(double netProfit) {
+    public int redToGreenColorLevel(double netProfit) {
         netProfit += 500;
         if (netProfit > 1000)
             netProfit = 1000;

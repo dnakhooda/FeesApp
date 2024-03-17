@@ -91,7 +91,7 @@ public class CalculateIncomeFragment extends Fragment {
         // Display Net Profit
         String netProfitTitleText = "Net Profit Per Month: " + mainActivity.currencyToSymbol(mainActivity.getSettings().getCurrencyType()) + Fee.numberToStringWithTwoDecimals(Fee.roundToTwoDecimalPlaces(netMonthlyProfit));
         binding.netProfitTitle.setText(netProfitTitleText);
-        binding.netProfitTitle.setTextColor(mainActivity.redToGreenColorLeve(netMonthlyProfit));
+        binding.netProfitTitle.setTextColor(mainActivity.redToGreenColorLevel(netMonthlyProfit));
 
         // Set Line Chart For Earnings Over 5 Months
         ValueLineChart chart = binding.incomeChart;

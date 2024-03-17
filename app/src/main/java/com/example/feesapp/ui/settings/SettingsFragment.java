@@ -40,7 +40,7 @@ public class SettingsFragment extends Fragment {
         mainActivity.bringBackNavBar();
 
         // Set What Currency Should Be Selected
-        setCurrencyChecked(binding);
+        setCurrencyChecked();
 
         // Set On Currency Change Event Listener
         binding.settingsCurrencyGroup.setOnCheckedChangeListener(this::onCheck);
@@ -48,7 +48,7 @@ public class SettingsFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void setCurrencyChecked(FragmentSettingsBinding binding) {
+    private void setCurrencyChecked() {
         // Get Currency In Settings Object & Set That Currency In Radio Group To Checked
         Currency currency = mainActivity.getSettings().getCurrencyType();
 
