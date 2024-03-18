@@ -52,6 +52,11 @@ public class AddItemFragment extends Fragment {
         if (mainActivity.isFeeTitleValid(title))
             return true;
 
+        if (mainActivity.getFees().getFeeByTitle(title) != null) {
+            Toast.makeText(mainActivity, "Title Unique! No Two Fees Should Have The Same Title!", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
         // Get Charge Rate Cost & Check If Charge Rate Cost Is Valid
         double chargeRateCost;
         try {

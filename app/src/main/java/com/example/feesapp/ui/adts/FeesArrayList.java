@@ -84,6 +84,14 @@ public class FeesArrayList extends ArrayList<Fee> {
         return null;
     }
 
+    public Fee getFeeByTitleExcluding(String title, Fee fee) {
+        for (int i = 0; i < size(); i++) {
+            if (get(i).getTitle().equals(title) && !get(i).equals(fee))
+                return get(i);
+        }
+        return null;
+    }
+
     public void removeFeeByTitle(String title) {
         for (int i = 0; i < size(); i++) {
             if (get(i).getTitle().equals(title)) {

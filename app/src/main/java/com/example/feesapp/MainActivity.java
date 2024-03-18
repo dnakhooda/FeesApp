@@ -90,11 +90,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        if (fees.getFeeByTitle(title) != null) {
-            Toast.makeText(this, "Title Unique! No Two Fees Should Have The Same Title!", Toast.LENGTH_LONG).show();
-            return true;
-        }
-
         return false;
     }
 
