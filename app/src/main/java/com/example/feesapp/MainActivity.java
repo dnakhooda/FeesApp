@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         fees = new FeesArrayList();
-        settings = new Settings();
         storageHandler = new StorageHandler();
+        settings = new Settings();
 
         // Get Saved Information
         storageHandler.getSavedFees();
