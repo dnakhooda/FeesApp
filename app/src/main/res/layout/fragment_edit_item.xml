@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.editItem.EditItemFragment"
+    android:background="@color/dark_gray">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/title_edit_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/title_edit_item"
+                android:fontFamily="sans-serif-light"
+                android:textSize="40sp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/edit_title_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Edit Title"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/edit_title_field"
+                android:background="@drawable/border_text_field"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:padding="10dp"
+                android:hint="Title"
+                android:inputType="text"
+                android:layout_marginBottom="12dp"
+                android:elevation="4dp" />
+
+            <TextView
+                android:id="@+id/edit_amount_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Edit Charge Rate Cost"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/edit_amount_field"
+                android:background="@drawable/border_text_field"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:padding="10dp"
+                android:hint="Charge Rate Cost"
+                android:inputType="numberDecimal|number"
+                android:layout_marginBottom="12dp"
+                android:elevation="4dp" />
+
+            <RadioGroup
+                android:id="@+id/edit_rate_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/edit_rate_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Edit Charge Rate"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/edit_button_daily"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:text="Daily"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/edit_button_weekly"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:text="Weekly"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/edit_button_monthly"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:text="Monthly"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/edit_button_yearly"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:text="Yearly"
+                    android:textColor="@color/white" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/edit_category_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/edit_category_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Edit Category"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <RadioButton
+                    android:id="@+id/edit_insurance_fee_button"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:text="Insurance Fee"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/edit_rent_fee_button"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:text="Rent/Property Tax Fee"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/edit_service_fee_button"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:text="Service Fee"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/edit_membership_fee_button"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:text="Membership Fee"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    android:id="@+id/edit_other_fee_button"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:text="Other Fee"
+                    android:textColor="@color/white" />
+
+            </RadioGroup>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/edit_delete_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_rounded_button_red"
+                    android:padding="10dp"
+                    android:text="Delete"
+                    android:textColor="@color/white"
+                    android:elevation="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/edit_cancel_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/edit_cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_rounded_button_black"
+                    android:padding="10dp"
+                    android:text="Cancel"
+                    android:textColor="@color/white"
+                    android:elevation="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/edit_change_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_rounded_button_white"
+                    android:padding="10dp"
+                    android:text="Change"
+                    android:textColor="@color/black"
+                    android:elevation="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/edit_cancel_button"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

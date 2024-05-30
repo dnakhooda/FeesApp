@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.overview.OverviewFragment"
+    android:background="@color/dark_gray">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/overview_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/title_overview"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/white"
+                android:textSize="40sp" />
+
+            <TextView
+                android:id="@+id/expenses_by_fee_category_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Expenses By Fee Category"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <org.eazegraph.lib.charts.PieChart
+                android:id="@+id/category_pie_chart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="32dp"
+                android:padding="8dp"
+                app:egLegendTextSize="16sp"
+                app:egUsePieRotation="true"
+                app:egValueTextSize="32sp" />
+
+            <TextView
+                android:id="@+id/total_expenses_chart_for_fees_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Total Expenses Chart For Fees"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TableLayout
+                android:id="@+id/overview_cost_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/light_gray"
+                android:layout_marginBottom="20dp">
+
+                <TableRow
+                    android:id="@+id/overview_cost_table_row_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/overview_cost_table_row_1_column_1"
+                        android:background="@drawable/border_table_cell"
+                        android:padding="8dp"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/overview_cost_table_row_1_column_2"
+                        android:background="@drawable/border_table_cell"
+                        android:padding="8dp"
+                        android:text="1 Day" />
+
+                    <TextView
+                        android:id="@+id/overview_cost_table_row_1_column_3"
+                        android:background="@drawable/border_table_cell"
+                        android:padding="8dp"
+                        android:text="10 Days" />
+
+                    <TextView
+                        android:id="@+id/overview_cost_table_row_1_column_4"
+                        android:background="@drawable/border_table_cell"
+                        android:padding="8dp"
+                        android:text="100 Days" />
+
+                    <TextView
+                        android:id="@+id/overview_cost_table_row_1_column_5"
+                        android:background="@drawable/border_table_cell"
+                        android:padding="8dp"
+                        android:text="1,000 Days" />
+                </TableRow>
+            </TableLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

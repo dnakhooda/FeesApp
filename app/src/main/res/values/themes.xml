@@ -1,0 +1,20 @@
+<resources>
+    <style name="Theme.FeesApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/light_gray</item>
+        <item name="colorPrimaryVariant">@color/dark_gray</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/green</item>
+        <item name="colorSecondaryVariant">@color/dark_green</item>
+        <item name="colorOnSecondary">@color/light_green</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/dark_gray</item>
+
+        <!-- Navigation bar color -->
+        <item name="android:navigationBarColor">@color/gray</item>
+
+    </style>
+</resources>

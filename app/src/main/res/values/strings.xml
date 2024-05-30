@@ -1,0 +1,37 @@
+<resources>
+    <!-- Titles -->
+    <string name="app_name">FeesApp</string>
+    <string name="title_overview">Overview</string>
+    <string name="title_edit">Edit</string>
+    <string name="title_calculate_income">Calculate Income</string>
+    <string name="title_calculate_income_shortened">Income</string>
+    <string name="title_simulate_expenses">Simulate Expenses</string>
+    <string name="title_simulate_expenses_shortened">Simulate</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_add_item">Add</string>
+    <string name="title_edit_item">Edit</string>
+
+    <!-- Description -->
+    <string name="main_logo_description">App Logo</string>
+
+    <!-- Edit Fee -->
+    <string name="edit_fee_title_default">Title</string>
+    <string name="edit_fee_category_default">Category</string>
+    <string name="edit_fee_cost_default">Cost</string>
+    <string name="edit_fee_button_text">Edit</string>
+
+    <!-- Settings -->
+    <string name="settings_currency_title">Currency:</string>
+
+    <!-- Currency -->
+    <string name="currency_us_dollar">US Dollar</string>
+    <string name="currency_euro">Euro</string>
+    <string name="currency_yen">Yen</string>
+    <string name="currency_sterling">Sterling</string>
+    <string name="currency_renminbi">Renminbi</string>
+    <string name="currency_aus_dollar">Australian Dollar</string>
+    <string name="currency_canadian_dollar">Canadian Dollar</string>
+    <string name="currency_swiss_franc">Swiss Franc</string>
+    <string name="currency_hk_dollar">Hong Kong Dollar</string>
+    <string name="currency_sg_dollar">Singapore Dollar</string>
+</resources>

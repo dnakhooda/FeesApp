@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.calculateIncome.CalculateIncomeFragment"
+    android:background="@color/dark_gray">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_calculate_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/title_calculate_income"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/white"
+                android:textSize="40sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <org.eazegraph.lib.charts.ValueLineChart
+                android:id="@+id/income_chart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="40dp"
+                app:egCurveSmoothness="0.2"
+                app:egIndicatorLineColor="#fff"
+                app:egLegendHeight="30dp"
+                app:egShowStandardValue="true"
+                app:egUseCubic="true"
+                app:egUseOverlapFill="false"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                app:egIndicatorTextColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/net_profit_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:text="Net Profit Per Month: ____"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/input_monthly_earning_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Input Monthly Earning"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/input_monthly_earning_title_text_field"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/border_text_field"
+                android:elevation="4dp"
+                android:hint="Input Monthly Earning"
+                android:inputType="number|numberDecimal"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/input_savings_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Input Total Savings"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/input_savings_text_field"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/border_text_field"
+                android:elevation="4dp"
+                android:hint="Input Savings"
+                android:inputType="number|numberDecimal"
+                android:padding="10dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/calculate_income_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_rounded_button_white"
+                android:elevation="8dp"
+                android:padding="10dp"
+                android:text="Calculate"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

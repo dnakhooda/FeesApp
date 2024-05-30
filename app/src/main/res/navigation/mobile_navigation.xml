@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_overview">
+
+    <fragment
+        android:id="@+id/navigation_overview"
+        android:name="com.example.feesapp.ui.overview.OverviewFragment"
+        android:label="@string/title_overview"
+        tools:layout="@layout/fragment_overview" />
+
+    <fragment
+        android:id="@+id/navigation_edit"
+        android:name="com.example.feesapp.ui.edit.EditFragment"
+        android:label="@string/title_edit"
+        tools:layout="@layout/fragment_edit" >
+
+        <action
+            android:id="@+id/action_navigation_edit_to_navigation_edit_item"
+            app:destination="@id/navigation_edit_item" />
+
+        <action
+            android:id="@+id/action_navigation_edit_to_navigation_add_item"
+            app:destination="@id/navigation_add_item" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_calculate_income"
+        android:name="com.example.feesapp.ui.calculateIncome.CalculateIncomeFragment"
+        android:label="@string/title_calculate_income"
+        tools:layout="@layout/fragment_calculate_income" />
+
+    <fragment
+        android:id="@+id/navigation_simulate_expenses"
+        android:name="com.example.feesapp.ui.simulateExpenses.SimulateExpensesFragment"
+        android:label="@string/title_simulate_expenses"
+        tools:layout="@layout/fragment_simulate_expenses" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.feesapp.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_add_item"
+        android:name="com.example.feesapp.ui.addItem.AddItemFragment"
+        android:label="@string/title_add_item"
+        tools:layout="@layout/fragment_add_item" />
+
+    <fragment
+        android:id="@+id/navigation_edit_item"
+        android:name="com.example.feesapp.ui.editItem.EditItemFragment"
+        android:label="@string/title_edit_item"
+        tools:layout="@layout/fragment_edit_item" />
+</navigation>

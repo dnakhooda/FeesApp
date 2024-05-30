@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_overview"
+        android:icon="@drawable/icon_overview_page"
+        android:title="@string/title_overview" />
+
+    <item
+        android:id="@+id/navigation_edit"
+        android:icon="@drawable/icon_edit_page"
+        android:title="@string/title_edit" />
+
+    <item
+        android:id="@+id/navigation_calculate_income"
+        android:icon="@drawable/icon_income_page"
+        android:title="@string/title_calculate_income_shortened" />
+
+    <item
+        android:id="@+id/navigation_simulate_expenses"
+        android:icon="@drawable/icon_simulate_page"
+        android:title="@string/title_simulate_expenses_shortened" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/icon_settings_page"
+        android:title="@string/title_settings" />
+
+</menu>
