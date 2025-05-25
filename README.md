@@ -1,6 +1,6 @@
 <h1>💵 Fees App 💵</h1>
 
-<p>Fees App is an Android application made to help people calculate expenses, find areas to save, and plan for the future. This app was made for my father as part of a High School Computer Science project.</p>
+<p>Fees App is an Android application designed to help users calculate expenses, find ways to save money, and plan for the future. This app was made for my father as part of a High School Computer Science project.</p>
 
 <h2>Screenshots 📸</h2>
 
