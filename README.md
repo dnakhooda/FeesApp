@@ -14,3 +14,7 @@
   <img src="https://github.com/user-attachments/assets/039b9963-9f64-4154-8021-3ec416b9097f" width="200"></img>
   <img src="https://github.com/user-attachments/assets/2c781a96-ec7f-4dbb-9bc7-a39245978388" width="200"></img>
 </p>
+
+<h2>Getting Fees App 💵</h2>
+
+Fees App is not Google Play Store. So, the only way to use Fees App is by building the code from this repository and using developer tools to install it on your device.
