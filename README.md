@@ -1,6 +1,6 @@
 <h1>💵 Fees App 💵</h1>
 
-<p>Fees App is an Android application designed to help users calculate expenses, find ways to save money, and plan for the future. This app was made for my father as part of a High School Computer Science project.</p>
+Fees App is an Android application designed to help users calculate expenses, find ways to save money, and plan for the future. This app was made for my father as part of a High School Computer Science project
 
 <h2>Screenshots 📸</h2>
 
@@ -17,9 +17,15 @@
 
 <h2>Features ✨</h2>
 
-<p>
-  
-</p>
+The Overview page gives you a general view of your expenses. The pie chart shows which categories are taking up what percentages of your income. The table below the pie chart displays what you'll be paying after a certain number of days for each expense.
+
+The Edit page lets you modify existing fees or create a new one. When creating a fee, you must provide a title, the amount, the category, and whether it recurs daily, weekly, monthly, or yearly.
+
+The Calculate Income page shows what your bank account might look like in a few months, based on your income and current balance.
+
+The Simulate Expenses page lets you see what your income would look like if you removed certain expenses.
+
+The Settings page allows you to change your currency.
 
 <h2>Getting Fees App 💵</h2>
 
