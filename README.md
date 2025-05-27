@@ -29,4 +29,4 @@ The Settings page allows you to change your currency.
 
 <h2>Getting Fees App 💵</h2>
 
-Fees App is not Google Play Store. So, the only way to use Fees App is by building the code from this repository and using developer tools to install it on your device.
+Fees App is not Google Play Store. So, the only way to use Fees App is by building the code from this repository in Android Studio and using developer tools to install it on your device.
