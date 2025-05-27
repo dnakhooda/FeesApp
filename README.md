@@ -4,7 +4,7 @@ Fees App is an Android application designed to help users calculate expenses, fi
 
 <h2>Screenshots 📸</h2>
 
-<p>
+<p align="center">
   <img src="https://github.com/user-attachments/assets/7c1be4ff-8932-4cda-95e9-1f4733c25d78" width="200"></img>
   <img src="https://github.com/user-attachments/assets/bf6959e5-732a-40ff-8431-3ca445d9ab18" width="200"></img>
   <img src="https://github.com/user-attachments/assets/610dc263-6f86-4754-97de-db3688f08b93" width="200"></img>
