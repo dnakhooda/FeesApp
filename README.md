@@ -2,7 +2,7 @@
 
 Fees App is an Android application designed to help users calculate expenses, find ways to save money, and plan for the future. This app was made for my father as part of a High School Computer Science project
 
-<h2>Screenshots 📸</h2>
+<h2>Screenshots</h2>
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/7c1be4ff-8932-4cda-95e9-1f4733c25d78" width="200"></img>
@@ -15,7 +15,7 @@ Fees App is an Android application designed to help users calculate expenses, fi
   <img src="https://github.com/user-attachments/assets/2c781a96-ec7f-4dbb-9bc7-a39245978388" width="200"></img>
 </p>
 
-<h2>Features ✨</h2>
+<h2>Features</h2>
 
 The Overview page gives you a general view of your expenses. The pie chart shows which categories are taking up what percentages of your income. The table below the pie chart displays what you'll be paying after a certain number of days for each expense.
 
