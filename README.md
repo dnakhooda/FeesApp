@@ -27,6 +27,6 @@ The Simulate Expenses page lets you see what your income would look like if you 
 
 The Settings page allows you to change your currency.
 
-<h2>Getting Fees App 💵</h2>
+<h2>Getting Fees App</h2>
 
 Fees App is not Google Play Store. So, the only way to use Fees App is by building the code from this repository in Android Studio and using developer tools to install it on your device.
